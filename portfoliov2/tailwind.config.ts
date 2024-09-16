@@ -19,6 +19,8 @@ const config: Config = {
       colors: {
         grayISH: "#D9D9D9",
         lightGray: "#EBEBEB",
+        darkGray: "#C7C7C7",
+        border: "#555555",
       },
       fontSize: {
         fontLG1: "40px",
@@ -32,7 +34,7 @@ const config: Config = {
       },
 
       boxShadow: {
-        'bottom-left': '-2px 2px 6px rgba(0, 0, 0, 0.3)', 
+        'bottom-left': '-2px 2px 5px rgba(0, 0, 0, 0.3)', 
       },
     },
   },
