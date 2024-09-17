@@ -21,6 +21,7 @@ const config: Config = {
         lightGray: "#EBEBEB",
         darkGray: "#C7C7C7",
         border: "#555555",
+        borderProject: "#747474",
       },
       fontSize: {
         fontLG1: "40px",

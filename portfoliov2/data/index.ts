@@ -151,3 +151,28 @@ export const socialmedia = [
         height: '25',
     },
   ];
+
+export const projects = [
+    {
+        image: ['./images/portfolio.png', './images/vlsm.png'],
+        title: 'Portfolio V1',
+        description: 'This is the prototype of my First Portfolio Website',
+        GitHubLink: 'https://github.com/milar111/Portfolio/blob/main/app/software-hardware-page/page.tsx',
+        YouTubeLink: 'https://www.youtube.com/watch?v=LOhfqjmasi0',
+        technologies: ["0", "1", "2", "3", "4"],
+        briefDescription: "",
+        problemStatement: "",
+        keyFeatures: "",
+    },
+    {
+        image: ['./images/portfolio.png'],
+        title: 'Portfolio V1',
+        description: 'This is the prototype of my First Portfolio Website',
+        GitHubLink: 'https://github.com/milar111/Portfolio/blob/main/app/software-hardware-page/page.tsx',
+        YouTubeLink: '',
+        technologies: ["5", "6", "8", "9"],
+        briefDescription: "",
+        problemStatement: "",
+        keyFeatures: "",
+    },
+]

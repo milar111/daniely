@@ -1,48 +1,115 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { projects, icons } from '@/data';
 
 const Projects = () => {
-  // Sample technology data, replace this with your actual data
-  const technologies = ['Tech1', 'Tech2', 'Tech3', 'Tech4']; 
-
   return (
     <div className='h-screen'>
       <h1 className='font-inconsolata text-fontLG1 font-normal flex justify-center items-center leading-tight'>
         What I've Been Working On
       </h1>
       <h1 className='font-inconsolata text-fontLG2 font-light flex justify-center items-center text-center pb-10 leading-tight'>
-        Certain projects aren’t listed<br/>
+        Certain projects aren’t listed<br />
         due to confidentiality.
       </h1>
-      <div className="grid grid-cols-2 gap-4 p-5">
-        <div className="bg-white border-[2px] shadow-bottom-left border-black rounded-3xl p-5 h-[470px] w-[400px] flex flex-col">
-          <div className='bg-grayISH h-[220px] w-[360px] rounded-2xl border-black border-[2px] flex justify-center items-center mb-4'>
-            <p className='text-2xl'>
-              Image
-            </p>
-          </div>
-          <h1 className='text-2xl font-bold font-inconsolata font-fontLG1'>
-            Header
-          </h1>
-          <h1 className='text-xl font-inconsolata text-fontLG2 font-normal'>
-            description
-          </h1>
-          <div className='flex items-center justify-center mt-[6rem] -ml-[6rem]'>
-            <div className='flex items-center relative'>
-              {technologies.map((tech, techIndex) => (
-                <div
-                  key={techIndex}
-                  style={{
-                    transform: `translateX(-${40 * techIndex + 4}px)`,
-                    zIndex: `${technologies.length - techIndex}`,
-                    position: 'absolute'
-                  }}
-                  className='border border-border bg-darkGray rounded-full lg:w-[3.2rem] lg:h-[3.2rem] w-8 h-8'
-                >
+
+      <div className="grid grid-cols-2 gap-4 p-5 relative">
+        {projects.map((project, index) => {
+          const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+          const nextImage = () => {
+            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % project.image.length);
+          };
+
+          const prevImage = () => {
+            setCurrentImageIndex((prevIndex) => (prevIndex - 1 + project.image.length) % project.image.length);
+          };
+
+          return (
+            <div
+              id='project-card'
+              key={index}
+              className="bg-lightGray border-[2px] shadow-bottom-left border-borderProject rounded-2xl p-5 h-[470px] w-[400px] flex flex-col relative 
+              filter grayscale hover:grayscale-0 transition duration-500"
+            >
+              {/* Project Image */}
+              <div className='bg-grayISH h-[224px] w-[364px] rounded-2xl border-black border-none flex justify-center items-center mb-4 relative overflow-hidden'>
+                <div className='relative w-full h-full'>
+                  {project.image.map((imgSrc, imgIndex) => (
+                    <img
+                      key={imgIndex}
+                      src={imgSrc}
+                      alt={project.title}
+                      className={`absolute h-full w-full object-cover rounded-2xl transition-opacity duration-500 
+                        ${imgIndex === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}
+                    />
+                  ))}
                 </div>
-              ))}
+
+                {/* Circles with icons */}
+                <div className="absolute bottom-4 right-4 flex space-x-1">
+                  <div
+                    className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center'
+                    onClick={prevImage} // Handle click for previous image
+                  >
+                    <img src="./icons/left.svg" alt="Left Arrow" className="w-6 h-6 flex items-center justify-center" />
+                  </div>
+                  <div
+                    className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center'
+                    onClick={nextImage} // Handle click for next image
+                  >
+                    <img src="./icons/right.svg" alt="Right Arrow" className="w-6 h-6 flex items-center justify-center" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Project Title */}
+              <h1 className='text-2xl font-bold font-inconsolata'>
+                {project.title}
+              </h1>
+
+              {/* Project Description */}
+              <h1 className='text-xl font-inconsolata text-fontLG2 font-normal'>
+                {project.description}
+              </h1>
+
+              {/* Technologies used */}
+              <div className='absolute bottom-16 left-3'>
+                {project.technologies.map((techId, techIndex) => {
+                  const techIcon = icons.find(icon => icon.id === techId);
+                  return (
+                    <div
+                      key={techIndex}
+                      style={{
+                        transform: `translateX(${35 * techIndex + 5}px)`,
+                        zIndex: `${project.technologies.length - techIndex}`,
+                        position: 'absolute'
+                      }}
+                      className='border border-border bg-darkGray rounded-full lg:w-11 lg:h-11 flex justify-center items-center filter grayscale'
+                    >
+                      {techIcon && (
+                        <img src={techIcon.icon} alt={techIcon.name} className="w-6 h-6" />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Conditional display of GitHub and YouTube icons */}
+              <div className="absolute bottom-6 right-6 flex space-x-1">
+                {project.GitHubLink && (
+                  <a href={project.GitHubLink} target="_blank" rel="noopener noreferrer">
+                    <img src="./icons/github.svg" alt="GitHub" className="w-8 h-8" />
+                  </a>
+                )}
+                {project.YouTubeLink && (
+                  <a href={project.YouTubeLink} target="_blank" rel="noopener noreferrer">
+                    <img src="./icons/youtube.svg" alt="YouTube" className="w-8 h-8" />
+                  </a>
+                )}
+              </div>
             </div>
-          </div>
-        </div>
+          );
+        })}
       </div>
     </div>
   );
