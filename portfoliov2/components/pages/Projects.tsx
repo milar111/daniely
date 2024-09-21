@@ -3,18 +3,19 @@ import { projects, icons } from '@/data';
 
 const Projects = () => {
   return (
-    <div className='h-screen flex flex-col justify-center items-center'>
+    <div className='py-20 relative min-h-screen flex flex-col justify-center items-center space-y-10 w-full'>
       <div>
-        <h1 className='font-inconsolata text-fontLG1 font-normal flex justify-center items-center leading-tight'>
+        <h1 className='font-inconsolata lg:text-fontLG1 font-normal flex justify-center items-center leading-tight text-[37px]'>
           <span>What I've Been Working On</span>
         </h1>
-        <h1 className='text-center font-inconsolata text-fontLG2 font-light leading-tight pb-10'>
+        <h1 className='text-center font-inconsolata lg:text-fontLG2 font-light leading-tight pb-10 text-[20px]'>
           <span>Certain projects aren’t listed</span><br />
           <span>due to confidentiality.</span>
         </h1>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 p-5">
+      {/* Responsive card width with fixed height */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-5">
         {projects.map((project, index) => {
           const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -30,11 +31,11 @@ const Projects = () => {
             <div
               id='project-card'
               key={index}
-              className="bg-lightGray border-[2px] shadow-bottom-left border-borderProject rounded-2xl p-5 h-[470px] w-[400px] flex flex-col relative 
-              filter grayscale hover:grayscale-0 transition duration-500"
+              className="bg-lightGray border-[2px] shadow-bottom-left border-borderProject rounded-2xl p-5 flex flex-col relative 
+              filter grayscale hover:grayscale-0 transition duration-500 w-full max-w-[400px] h-[470px]"
             >
               {/* Project Image */}
-              <div className='bg-grayISH h-[224px] w-[364px] rounded-2xl border-black border-none flex justify-center items-center mb-4 relative overflow-hidden'>
+              <div className='bg-grayISH w-full h-[224px] rounded-2xl border-black flex justify-center items-center mb-4 relative overflow-hidden'>
                 <div className='relative w-full h-full'>
                   {project.image.map((imgSrc, imgIndex) => (
                     <img
@@ -86,7 +87,7 @@ const Projects = () => {
                         zIndex: `${project.technologies.length - techIndex}`,
                         position: 'absolute'
                       }}
-                      className='border border-border bg-darkGray rounded-full lg:w-11 lg:h-11 flex justify-center items-center filter grayscale'
+                      className='border border-border bg-darkGray rounded-full w-11 h-11 flex justify-center items-center filter grayscale'
                     >
                       {techIcon && (
                         <img src={techIcon.icon} alt={techIcon.name} className="w-6 h-6" />

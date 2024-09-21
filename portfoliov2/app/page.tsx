@@ -15,7 +15,7 @@ export default function Home() {
   // }, []);
 
   return (
-    <main className="custom-cursor flex flex-col justify-center items-center">
+    <main className="custom-cursor flex flex-col justify-center items-center overflow-hidden mx-auto sm:px-10 px-5">
       <section>
         <Hero/>
       </section>

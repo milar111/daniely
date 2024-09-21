@@ -11,16 +11,19 @@ const config: Config = {
       cursor: {
         'custom-default': 'url(/cursor/default.svg), auto',
         'custom-text': 'url(/cursor/text.svg), text',
-        'custom-link': 'url(/cursor/link.svg), pointer',
+        'custom-link': 'url(/cursor/default.svg), pointer',
       },
+      
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      
       fontFamily: {
         inconsolata: ['Inconsolata', 'monospace'],
       },
+
       colors: {
         grayISH: "#D9D9D9",
         lightGray: "#EBEBEB",
@@ -28,6 +31,7 @@ const config: Config = {
         border: "#555555",
         borderProject: "#747474",
       },
+
       fontSize: {
         fontLG1: "40px",
         fontSM1: "32px",
@@ -41,6 +45,10 @@ const config: Config = {
 
       boxShadow: {
         'bottom-left': '-2px 2px 5px rgba(0, 0, 0, 0.3)', 
+      },
+
+      screens:{
+        'xsm': {'max': '420px'},
       },
     },
   },
