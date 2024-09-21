@@ -1,14 +1,39 @@
-'use client';
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { icons, technologies } from '@/data';
 
-const TechWheel = () => {
-  const outerCircleRadius = 160;
-  const innerCircleRadius = 90;
-  const iconRadius = 15; // Reduced icon size
-  const centerX = 200;
-  const centerY = 200;
+// Define the type of the size prop
+interface TechWheelProps {
+  size: {
+    sm: number;
+    lg: number;
+  };
+}
+
+const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
+  const [currentSize, setCurrentSize] = useState(size.lg); // Default to lg size
+
+  // Resize event listener for window
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1024) {
+        setCurrentSize(size.lg);  // Large screen
+      } else if (window.innerWidth > 768) {
+        setCurrentSize(size.lg - 50);  // Medium screen (slightly smaller)
+      } else {
+        setCurrentSize(size.sm);  // Small screen
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Set the initial size on load
+    return () => window.removeEventListener('resize', handleResize);
+  }, [size]);
+
+  const outerCircleRadius = currentSize / 2.5;
+  const innerCircleRadius = currentSize / 4;
+  const iconRadius = 15; // Keep the original icon size
+  const centerX = currentSize / 2;
+  const centerY = currentSize / 2;
 
   const innerCircleTechs = technologies.slice(0, 3);
   const outerCircleTechs = technologies.slice(3);
@@ -30,9 +55,9 @@ const TechWheel = () => {
   return (
     <div className='tech-wheel'>
       <svg
-        width="400"
-        height="400"
-        viewBox="0 0 400 400"
+        width={currentSize}
+        height={currentSize}
+        viewBox={`0 0 ${currentSize} ${currentSize}`}
         xmlns="http://www.w3.org/2000/svg"
       >
         <circle
@@ -57,7 +82,7 @@ const TechWheel = () => {
         />
 
         {/* Render icons for the inner circle */}
-        {innerCirclePositions.map(({ id, x, y, angle }) => {
+        {innerCirclePositions.map(({ id, x, y }) => {
           const techIcon = icons.find(icon => icon.id === id);
           return (
             <React.Fragment key={id}>
@@ -65,7 +90,7 @@ const TechWheel = () => {
               <circle
                 cx={x + iconRadius}
                 cy={y + iconRadius}
-                r={iconRadius + 5} // Background circle radius (slightly larger than icon)
+                r={iconRadius + 5}
                 fill="white"
                 stroke="black"
                 strokeWidth="1"
@@ -87,7 +112,7 @@ const TechWheel = () => {
         })}
 
         {/* Render icons for the outer circle */}
-        {outerCirclePositions.map(({ id, x, y, angle }) => {
+        {outerCirclePositions.map(({ id, x, y }) => {
           const techIcon = icons.find(icon => icon.id === id);
           return (
             <React.Fragment key={id}>
@@ -95,7 +120,7 @@ const TechWheel = () => {
               <circle
                 cx={x + iconRadius}
                 cy={y + iconRadius}
-                r={iconRadius + 5} // Background circle radius (slightly larger than icon)
+                r={iconRadius + 5}
                 fill="white"
                 stroke="black"
                 strokeWidth="1"
@@ -121,8 +146,6 @@ const TechWheel = () => {
           display: flex;
           justify-content: center;
           align-items: center;
-          width: 400px;
-          height: 400px;
           animation: spin 95s linear infinite;
         }
 
@@ -143,18 +166,9 @@ const TechWheel = () => {
             transform: rotate(360deg);
           }
         }
-
-        @keyframes pin2 {
-          from {
-            transform: rotate(-360deg);
-          }
-          to {
-            transform: rotate(0deg);
-          }
-        }
       `}</style>
     </div>
   );
-}
+};
 
 export default TechWheel;

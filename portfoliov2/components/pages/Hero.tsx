@@ -35,7 +35,7 @@ const Hero = () => {
           </div>
         </div>
         <div className='col-span-1 flex justify-center mt-8 lg:mt-0'>
-          <TechWheel />
+          <TechWheel size={{ sm: 300, lg: 400 }} />
         </div>
       </div>
     </div>
