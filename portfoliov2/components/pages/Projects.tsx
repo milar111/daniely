@@ -3,16 +3,18 @@ import { projects, icons } from '@/data';
 
 const Projects = () => {
   return (
-    <div className='h-screen'>
-      <h1 className='font-inconsolata text-fontLG1 font-normal flex justify-center items-center leading-tight'>
-        What I've Been Working On
-      </h1>
-      <h1 className='font-inconsolata text-fontLG2 font-light flex justify-center items-center text-center pb-10 leading-tight'>
-        Certain projects aren’t listed<br />
-        due to confidentiality.
-      </h1>
+    <div className='h-screen flex flex-col justify-center items-center'>
+      <div>
+        <h1 className='font-inconsolata text-fontLG1 font-normal flex justify-center items-center leading-tight'>
+          <span>What I've Been Working On</span>
+        </h1>
+        <h1 className='text-center font-inconsolata text-fontLG2 font-light leading-tight pb-10'>
+          <span>Certain projects aren’t listed</span><br />
+          <span>due to confidentiality.</span>
+        </h1>
+      </div>
 
-      <div className="grid grid-cols-2 gap-4 p-5 relative">
+      <div className="grid grid-cols-2 gap-4 p-5">
         {projects.map((project, index) => {
           const [currentImageIndex, setCurrentImageIndex] = useState(0);
 

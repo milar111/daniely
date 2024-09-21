@@ -8,6 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      cursor: {
+        'custom-default': 'url(/cursor/default.svg), auto',
+        'custom-text': 'url(/cursor/text.svg), text',
+        'custom-link': 'url(/cursor/link.svg), pointer',
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

@@ -4,11 +4,23 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-    user-select: none; 
-  }
- /* disables text selection */
 
- .custom-cursor {
-  cursor: url('/cursor/default.svg'), auto;
+::selection {
+  background-color: #C7C7C7;
+  color: white;
+}
+
+
+@layer base {
+  body {
+    @apply cursor-custom-default;
+  }
+
+  span{
+    @apply cursor-custom-text;
+  }
+
+  a {
+    @apply cursor-custom-link;
+  }
 }
