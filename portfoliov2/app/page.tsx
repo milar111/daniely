@@ -1,9 +1,9 @@
-// Mark this as a Client Component by adding "use client"
 "use client";
 
 import { useEffect } from 'react';
 import Hero from "@/components/pages/Hero";
 import Projects from "@/components/pages/Projects";
+import './globals.css';
 
 export default function Home() {
   // useEffect(() => {
@@ -15,11 +15,11 @@ export default function Home() {
   // }, []);
 
   return (
-    <main className="flex flex-col justify-center items-center">
-      <section className="">
+    <main className="custom-cursor flex flex-col justify-center items-center">
+      <section>
         <Hero/>
       </section>
-      <section className="">
+      <section>
         <Projects/>
       </section>
     </main>

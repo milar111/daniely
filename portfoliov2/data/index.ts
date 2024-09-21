@@ -175,4 +175,4 @@ export const projects = [
         problemStatement: "",
         keyFeatures: "",
     },
-]
+];

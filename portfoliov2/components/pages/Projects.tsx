@@ -49,13 +49,13 @@ const Projects = () => {
                 <div className="absolute bottom-4 right-4 flex space-x-1">
                   <div
                     className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center'
-                    onClick={prevImage} // Handle click for previous image
+                    onClick={prevImage} 
                   >
                     <img src="./icons/left.svg" alt="Left Arrow" className="w-6 h-6 flex items-center justify-center" />
                   </div>
                   <div
                     className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center'
-                    onClick={nextImage} // Handle click for next image
+                    onClick={nextImage}
                   >
                     <img src="./icons/right.svg" alt="Right Arrow" className="w-6 h-6 flex items-center justify-center" />
                   </div>
