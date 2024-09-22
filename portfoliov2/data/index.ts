@@ -153,27 +153,29 @@ export const socialmedia = [
     },
   ];
 
-export const projects = [
+  export const projects = [
     {
+        id: 'portfolio-v1',
         image: ['./images/portfolio.png', './images/vlsm.png'],
         title: 'Portfolio V1',
         description: 'This is the prototype of my First Portfolio Website',
         GitHubLink: 'https://github.com/milar111/Portfolio/blob/main/app/software-hardware-page/page.tsx',
         YouTubeLink: 'https://www.youtube.com/watch?v=LOhfqjmasi0',
         technologies: ["0", "1", "2", "3", "4"],
-        briefDescription: "",
-        problemStatement: "",
-        keyFeatures: "",
+        briefDescription: "A brief description of the project.",
+        problemStatement: "The problem this project aims to solve.",
+        keyFeatures: "Key features of the project.",
     },
     {
+        id: 'portfolio-v1-alt',
         image: ['./images/portfolio.png'],
-        title: 'Portfolio V1',
-        description: 'This is the prototype of my First Portfolio Website',
+        title: 'Portfolio V1 - Alternative',
+        description: 'This is the prototype of my First Portfolio Website (Alternative Version)',
         GitHubLink: 'https://github.com/milar111/Portfolio/blob/main/app/software-hardware-page/page.tsx',
         YouTubeLink: '',
         technologies: ["5", "6", "8", "9"],
-        briefDescription: "",
-        problemStatement: "",
-        keyFeatures: "",
+        briefDescription: "An alternative version of the project.",
+        problemStatement: "Alternative problem this project solves.",
+        keyFeatures: "Key features of this alternative version.",
     },
 ];
