@@ -5,8 +5,8 @@ import TechWheel from '../ui/TechWheel';
 const Hero = () => {
   return (
     <div className='flex justify-center items-center h-screen px-4 mx-4'>
-      <div className='lg:grid lg:grid-cols-2 lg:items-center lg:gap-4 flex flex-col items-center justify-center text-center'>
-        <div className='col-span-1 flex flex-col lg:mr-4 text-center lg:text-left'>
+      <div className='lg:grid lg:grid-cols-2 lg:items-center lg:gap-1 flex flex-col items-center justify-center text-center'>
+        <div className='col-span-1 flex flex-col lg:mr-0 text-center lg:text-left'>
           <h1 className='font-inconsolata text-4xl lg:text-5xl font-normal leading-tight '>
             <span>Hi, I’m Daniel Yordanov</span>
           </h1>

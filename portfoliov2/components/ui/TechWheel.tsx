@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { icons, technologies } from '@/data';
 
-// Define the type of the size prop
 interface TechWheelProps {
   size: {
     sm: number;
@@ -91,8 +90,10 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
                 cx={x + iconRadius}
                 cy={y + iconRadius}
                 r={iconRadius + 5}
-                fill="white"
-                stroke="black"
+                fill= '#D9D9D9'
+                fillOpacity='0.9'
+                stroke='black'
+                strokeOpacity='0.36'
                 strokeWidth="1"
               />
               {/* Icon */}
@@ -121,8 +122,10 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
                 cx={x + iconRadius}
                 cy={y + iconRadius}
                 r={iconRadius + 5}
-                fill="white"
-                stroke="black"
+                fill='#D9D9D9'
+                fillOpacity='0.9'
+                stroke='black'
+                strokeOpacity='0.36'
                 strokeWidth="1"
               />
               {/* Icon */}
