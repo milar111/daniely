@@ -155,7 +155,7 @@ export const socialmedia = [
 
   export const projects = [
     {
-        id: 'portfolio-v1',
+        id: '1',
         image: ['./images/portfolio.png', './images/vlsm.png'],
         title: 'Portfolio V1',
         description: 'This is the prototype of my First Portfolio Website',
@@ -167,7 +167,7 @@ export const socialmedia = [
         keyFeatures: "Key features of the project.",
     },
     {
-        id: 'portfolio-v1-alt',
+        id: '2',
         image: ['./images/portfolio.png'],
         title: 'Portfolio V1 - Alternative',
         description: 'This is the prototype of my First Portfolio Website (Alternative Version)',

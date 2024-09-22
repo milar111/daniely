@@ -1,42 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { projects, icons } from '@/data';
+import { useRouter } from 'next/navigation';
 
 const Projects = () => {
   const [windowWidth, setWindowWidth] = useState<number>(0);
+  const router = useRouter();
 
   useEffect(() => {
-    // Set the window width on initial load and handle resize
     const handleResize = () => setWindowWidth(window.innerWidth);
-    
-    // Set initial window width when component mounts
     handleResize();
-
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleProjectClick = (id: string) => {
+    router.push(`/${id}`);
+  };
+
   return (
     <div className='py-20 relative min-h-screen flex flex-col justify-center items-center space-y-10 w-full'>
       <div className="w-full flex flex-col items-center text-center mx-auto">
-        <h1 className="font-inconsolata lg:text-fontLG1 font-normal leading-tight text-[37px] flex justify-center items-center text-center">
-          <span>What I've Been Working On</span>
+        <h1 className="font-inconsolata lg:text-fontLG1 font-normal leading-tight text-[37px]">
+          What I've Been Working On
         </h1>
         <h1 className="font-inconsolata lg:text-fontLG2 font-light leading-tight pb-8 xsm:pb-2 text-[20px]">
-          <span>Certain projects aren’t listed</span><br />
-          <span>due to confidentiality.</span>
+          Certain projects aren’t listed due to confidentiality.
         </h1>
       </div>
 
-      {/* Responsive card width with fixed height */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-5 xsm:p-1">
         {projects.map((project, index) => {
           const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-          const nextImage = () => {
+          const nextImage = (e: React.MouseEvent) => {
+            e.stopPropagation();
             setCurrentImageIndex((prevIndex) => (prevIndex + 1) % project.image.length);
           };
 
-          const prevImage = () => {
+          const prevImage = (e: React.MouseEvent) => {
+            e.stopPropagation();
             setCurrentImageIndex((prevIndex) => (prevIndex - 1 + project.image.length) % project.image.length);
           };
 
@@ -44,11 +46,14 @@ const Projects = () => {
             <div
               id='project-card'
               key={index}
+              onClick={() => handleProjectClick(project.id)}
               className="bg-lightGray border-[2px] shadow-bottom-left border-borderProject rounded-2xl p-5 flex flex-col relative 
-              filter grayscale hover:grayscale-0 transition duration-500 w-full max-w-[400px] h-[470px]"
+              filter grayscale hover:grayscale-0 transition duration-500 w-full max-w-[400px] h-[470px] cursor-pointer"
             >
-              {/* Project Image */}
-              <div className='bg-grayISH w-full h-[224px] rounded-2xl border-black flex justify-center items-center mb-4 relative overflow-hidden'>
+              <div
+                className='bg-grayISH w-full h-[224px] rounded-2xl border-black flex justify-center items-center mb-4 relative overflow-hidden'
+                onClick={(e) => e.stopPropagation()}
+              >
                 <div className='relative w-full h-full'>
                   {project.image.map((imgSrc, imgIndex) => (
                     <img
@@ -61,11 +66,10 @@ const Projects = () => {
                   ))}
                 </div>
 
-                {/* Circles with icons */}
                 <div className="absolute bottom-4 right-4 flex space-x-1">
                   <div
                     className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center xxsm:w-6 xxsm:h-6'
-                    onClick={prevImage} 
+                    onClick={prevImage}
                   >
                     <img src="./icons/left.svg" alt="Left Arrow" className="w-6 h-6 flex items-center justify-center xxsm:w-5 xxsm:h-5" />
                   </div>
@@ -78,22 +82,17 @@ const Projects = () => {
                 </div>
               </div>
 
-              {/* Project Title */}
               <h1 className='text-2xl font-bold font-inconsolata xxsm:text-xl'>
-                <span>{project.title}</span>
+                {project.title}
               </h1>
 
-              {/* Project Description */}
               <h1 className='text-xl font-inconsolata text-fontLG2 font-normal xxsm:text-base'>
-                <span>{project.description}</span>
+                {project.description}
               </h1>
 
-              {/* Technologies used */}
               <div className='absolute bottom-16 xxsm:bottom-[3.5rem] left-3'>
                 {project.technologies.map((techId, techIndex) => {
                   const techIcon = icons.find(icon => icon.id === techId);
-
-                  // Adjust translation based on screen size
                   const translationX = windowWidth > 380 ? 35 * techIndex + 5 : 26 * techIndex + 5;
 
                   return (
@@ -115,15 +114,24 @@ const Projects = () => {
                 })}
               </div>
 
-              {/* Conditional display of GitHub and YouTube icons */}
               <div className="absolute bottom-6 right-6 flex space-x-1">
                 {project.GitHubLink && (
-                  <a href={project.GitHubLink} target="_blank" rel="noopener noreferrer">
+                  <a 
+                    href={project.GitHubLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()} 
+                  >
                     <img src="./icons/github.svg" alt="GitHub" className="w-8 h-8 xxsm:w-6 xxsm:h-6" />
                   </a>
                 )}
                 {project.YouTubeLink && (
-                  <a href={project.YouTubeLink} target="_blank" rel="noopener noreferrer">
+                  <a 
+                    href={project.YouTubeLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()} 
+                  >
                     <img src="./icons/youtube.svg" alt="YouTube" className="w-8 h-8 xxsm:w-6 xxsm:h-6" />
                   </a>
                 )}
