@@ -26,7 +26,8 @@ const Projects = () => {
           <span>What I've Been Working On</span>
         </h1>
         <h1 className="font-inconsolata lg:text-fontLG2 font-light leading-tight pb-8 xsm:pb-2 text-[20px]">
-          <span>Certain projects aren’t listed due to confidentiality.</span>
+          <span>Certain projects aren’t listed</span><br />
+          <span>due to confidentiality.</span>
         </h1>
       </div>
 
@@ -56,17 +57,17 @@ const Projects = () => {
               ref={ref}
               initial={{ opacity: 0, x: initialX }}
               animate={{
-                opacity: inView ? [0, 0.5, 1] : 0, 
+                opacity: inView ? [0, 0.5, 1] : 0,
                 x: inView ? 0 : initialX,
               }}
               transition={{
-                x: { duration: 0.5, ease: 'easeOut' }, 
-                opacity: { duration: 0.5, ease: 'easeOut', delay: 0.25 }, 
+                x: { duration: 0.5, ease: 'easeOut' },
+                opacity: { duration: 0.5, ease: 'easeOut', delay: 0.25 },
               }}
               key={index}
               onClick={() => handleProjectClick(project.id)}
               className="bg-lightGray border-[2px] shadow-bottom-left border-borderProject rounded-2xl p-5 flex flex-col relative 
-              filter grayscale hover:grayscale-0 transition duration-500 w-full max-w-[400px] h-[470px] cursor-pointer"
+              filter grayscale hover:grayscale-0 transition duration-500 w-full max-w-[400px] h-[470px] cursor-custom-card"
             >
 
               <div
@@ -102,11 +103,11 @@ const Projects = () => {
               </div>
 
               <h1 className='text-2xl font-bold font-inconsolata xxsm:text-xl'>
-                {project.title}
+                <span>{project.title}</span>
               </h1>
 
               <h1 className='text-xl font-inconsolata text-fontLG2 font-normal xxsm:text-base'>
-                {project.description}
+                <span>{project.description}</span>
               </h1>
 
               <div className='absolute bottom-16 xxsm:bottom-[3.5rem] left-3'>

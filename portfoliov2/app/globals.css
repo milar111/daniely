@@ -4,26 +4,41 @@
 @tailwind components;
 @tailwind utilities;
 
-
 ::selection {
   background-color: #C7C7C7;
   color: white;
 }
-
 
 @layer base {
   body {
     @apply cursor-custom-default;
   }
 
-  span{
+  span {
     @apply cursor-custom-text;
   }
 
   a {
     @apply cursor-custom-link;
   }
+
+  .cursor-custom-card {
+    cursor: url('/cursor/default.svg'), pointer;
+  }
+
+  .cursor-custom-default {
+    cursor: url('/cursor/default.svg'), auto;
+  }
+
+  .cursor-custom-text {
+    cursor: url('/cursor/text.svg'), text;
+  }
+
+  .cursor-custom-link {
+    cursor: url('/cursor/link.svg'), pointer;
+  }
 }
+
 
 
 
@@ -44,41 +59,4 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #4b5563; 
-}
-
-/* CSS for fade-in and slide animations */
-@keyframes slideInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-50px); /* Slide in from the left */
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(50px); /* Slide in from the right */
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.project-card {
-  opacity: 0;
-  transform: translateX(50px); /* Start with cards off-screen */
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-}
-
-.project-card.visible-left {
-  animation: slideInLeft 0.7s forwards; /* Slide in from the left */
-}
-
-.project-card.visible-right {
-  animation: slideInRight 0.7s forwards; /* Slide in from the right */
 }
