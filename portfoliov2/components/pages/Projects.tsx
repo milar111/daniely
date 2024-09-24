@@ -39,7 +39,7 @@ const Projects = () => {
           });
 
           const isLeftCard = index % 2 === 0;
-          const initialX = isLeftCard ? '-25%' : '25%'; // Shorter animation distance
+          const initialX = isLeftCard ? '-15%' : '15%';
 
           const nextImage = (e: React.MouseEvent) => {
             e.stopPropagation();
@@ -56,12 +56,12 @@ const Projects = () => {
               ref={ref}
               initial={{ opacity: 0, x: initialX }}
               animate={{
-                opacity: inView ? [0, 0.5, 1] : 0, // Animating opacity to gradually increase
+                opacity: inView ? [0, 0.5, 1] : 0, 
                 x: inView ? 0 : initialX,
               }}
               transition={{
-                x: { duration: 0.5, ease: 'easeOut' }, // Animation for movement
-                opacity: { duration: 0.5, ease: 'easeOut', delay: 0.25 }, // Opacity gradually increases towards the end
+                x: { duration: 0.5, ease: 'easeOut' }, 
+                opacity: { duration: 0.5, ease: 'easeOut', delay: 0.25 }, 
               }}
               key={index}
               onClick={() => handleProjectClick(project.id)}
