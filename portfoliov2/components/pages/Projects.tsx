@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { projects, icons } from '@/data';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const Projects = () => {
   const [windowWidth, setWindowWidth] = useState<number>(0);
@@ -21,16 +23,23 @@ const Projects = () => {
     <div className='py-20 relative min-h-screen flex flex-col justify-center items-center space-y-10 w-full'>
       <div className="w-full flex flex-col items-center text-center mx-auto">
         <h1 className="font-inconsolata lg:text-fontLG1 font-normal leading-tight text-[37px]">
-          What I've Been Working On
+          <span>What I've Been Working On</span>
         </h1>
         <h1 className="font-inconsolata lg:text-fontLG2 font-light leading-tight pb-8 xsm:pb-2 text-[20px]">
-          Certain projects aren’t listed due to confidentiality.
+          <span>Certain projects aren’t listed due to confidentiality.</span>
         </h1>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-5 xsm:p-1">
         {projects.map((project, index) => {
           const [currentImageIndex, setCurrentImageIndex] = useState(0);
+          const { ref, inView } = useInView({
+            triggerOnce: true,
+            threshold: 0.1,
+          });
+
+          const isLeftCard = index % 2 === 0;
+          const initialX = isLeftCard ? '-25%' : '25%'; // Shorter animation distance
 
           const nextImage = (e: React.MouseEvent) => {
             e.stopPropagation();
@@ -43,13 +52,23 @@ const Projects = () => {
           };
 
           return (
-            <div
-              id='project-card'
+            <motion.div
+              ref={ref}
+              initial={{ opacity: 0, x: initialX }}
+              animate={{
+                opacity: inView ? [0, 0.5, 1] : 0, // Animating opacity to gradually increase
+                x: inView ? 0 : initialX,
+              }}
+              transition={{
+                x: { duration: 0.5, ease: 'easeOut' }, // Animation for movement
+                opacity: { duration: 0.5, ease: 'easeOut', delay: 0.25 }, // Opacity gradually increases towards the end
+              }}
               key={index}
               onClick={() => handleProjectClick(project.id)}
               className="bg-lightGray border-[2px] shadow-bottom-left border-borderProject rounded-2xl p-5 flex flex-col relative 
               filter grayscale hover:grayscale-0 transition duration-500 w-full max-w-[400px] h-[470px] cursor-pointer"
             >
+
               <div
                 className='bg-grayISH w-full h-[224px] rounded-2xl border-black flex justify-center items-center mb-4 relative overflow-hidden'
                 onClick={(e) => e.stopPropagation()}
@@ -136,7 +155,7 @@ const Projects = () => {
                   </a>
                 )}
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>

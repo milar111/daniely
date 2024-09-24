@@ -11,7 +11,7 @@ const config: Config = {
       cursor: {
         'custom-default': 'url(/cursor/default.svg), auto',
         'custom-text': 'url(/cursor/text.svg), text',
-        'custom-link': 'url(/cursor/default.svg), pointer',
+        'custom-link': 'url(/cursor/link.svg), pointer',
       },
       
       backgroundImage: {
