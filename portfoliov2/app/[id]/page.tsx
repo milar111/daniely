@@ -20,7 +20,7 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
-    handleResize(); 
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -38,19 +38,19 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
   };
 
   return (
-    <div className='flex justify-center items-center h-screen px-5'>
+    <div className='py-20 relative min-h-screen flex flex-col justify-center items-center space-y-10 w-full'>
       <div className='flex w-full max-w-5xl space-x-4'>
         {/* Left Side: Image and Controls */}
         <div className='relative'>
           <button 
             onClick={goBackToProjects} 
-            className='absolute -top-9 left-0 flex items-center text-sm bg-lightGray rounded-xl px-2 py-1 hover:bg-grayISH justify-center shadow-sm border-2 border-grayISH'
+            className='absolute -top-9 left-0 flex items-center text-sm bg-lightGray rounded-xl px-2 py-1 hover:bg-grayISH justify-center shadow-sm border-2 border-lightGray hover:border-grayISH'
           >
             <img src="/icons/left.svg" alt="Go Back" className="w-4 h-4" />
             Go Back
           </button>
 
-          <div className='relative w-[400px] h-[470px] rounded-xl overflow-hidden shadow-lg border-lightGray border-2'>
+          <div className='relative w-[470px] h-[440px] rounded-xl overflow-hidden shadow-lg border-lightGray border-2'>
             <div className='relative w-full h-full'>
               {project.image.map((imgSrc, imgIndex) => (
                 <motion.img
@@ -107,14 +107,51 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
           </div>
         </div>
 
-        {/* Right Side: Title and Brief Description */}
-        <div className='flex-1 flex flex-col justify-center items-start'>
-          <h1 className='text-3xl font-bold mb-4'><span>{project.title}</span></h1>
-          <div className='p-6 bg-grayISH bg-opacity-30 rounded-lg w-full h-full max-w-md flex justify-center items-center shadow-md'>
-            <p className='text-sm'><span>{project.briefDescription}</span></p>
+        {/* Right Side: Title, Brief Description, and Links */}
+        <div className='flex-1 flex flex-col justify-center items-start pl-2 space-y-6 relative'>
+          <h1 className='text-3xl font-bold'><span>{project.title}</span></h1>
+          <div className='p-6 bg-grayISH bg-opacity-30 rounded-lg w-full flex justify-center items-center shadow-md h-full relative'>
+            <p className='text-sm text-center'><span>{project.briefDescription}</span></p>
+
+            {/* Links to GitHub and YouTube in the bottom right */}
+            <div className="absolute bottom-3 right-3 flex space-x-2">
+              {project.GitHubLink && (
+                <a 
+                  href={project.GitHubLink} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <img src="/icons/github.svg" alt="GitHub" className="w-8 h-8 xxsm:w-6 xxsm:h-6" />
+                </a>
+              )}
+              {project.YouTubeLink && (
+                <a 
+                  href={project.YouTubeLink} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <img src="/icons/youtube.svg" alt="YouTube" className="w-8 h-8 xxsm:w-6 xxsm:h-6" />
+                </a>
+              )}
+            </div>
           </div>
         </div>
+      </div>
 
+      {/* Objectives and Goals Section */}
+      <div className='mt-8 w-full max-w-5xl pb-8'>
+        <h1 className='text-3xl font-bold flex justify-center items-center pb-1'><span>Objectives and Goals</span></h1>
+        <div className='p-6 bg-grayISH bg-opacity-30 rounded-lg flex justify-center items-center shadow-md h-full '>
+          <p className='text-sm text-center'><span>{project.problemStatement}</span></p>
+        </div>
+      </div>
+
+      {/* Features and Highlights */}
+      <div className='mt-8 w-full max-w-5xl'>
+        <h1 className='text-3xl font-bold flex justify-center items-center pb-1'><span>Features and Highlights</span></h1>
+        <div className='p-6 bg-grayISH bg-opacity-30 rounded-lg flex justify-center items-center shadow-md h-full '>
+          <p className='text-sm text-center'><span>{project.keyFeatures}</span></p>
+        </div>
       </div>
     </div>
   );
