@@ -43,12 +43,12 @@ const Projects = () => {
           const initialX = isLeftCard ? '-15%' : '15%';
 
           const nextImage = (e: React.MouseEvent) => {
-            e.stopPropagation();
+            e.stopPropagation(); 
             setCurrentImageIndex((prevIndex) => (prevIndex + 1) % project.image.length);
           };
 
           const prevImage = (e: React.MouseEvent) => {
-            e.stopPropagation();
+            e.stopPropagation(); 
             setCurrentImageIndex((prevIndex) => (prevIndex - 1 + project.image.length) % project.image.length);
           };
 
@@ -72,7 +72,7 @@ const Projects = () => {
 
               <div
                 className='bg-grayISH w-full h-[224px] rounded-2xl border-black flex justify-center items-center mb-4 relative overflow-hidden'
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => handleProjectClick(project.id)}
               >
                 <div className='relative w-full h-full'>
                   {project.image.map((imgSrc, imgIndex) => (
@@ -89,13 +89,13 @@ const Projects = () => {
                 <div className="absolute bottom-4 right-4 flex space-x-1">
                   <div
                     className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center xxsm:w-6 xxsm:h-6'
-                    onClick={prevImage}
+                    onClick={prevImage} 
                   >
                     <img src="./icons/left.svg" alt="Left Arrow" className="w-6 h-6 flex items-center justify-center xxsm:w-5 xxsm:h-5" />
                   </div>
                   <div
                     className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center xxsm:w-6 xxsm:h-6'
-                    onClick={nextImage}
+                    onClick={nextImage} 
                   >
                     <img src="./icons/right.svg" alt="Right Arrow" className="w-6 h-6 flex items-center justify-center xxsm:w-5 xxsm:h-5" />
                   </div>

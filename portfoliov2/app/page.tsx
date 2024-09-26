@@ -6,20 +6,13 @@ import Projects from "@/components/pages/Projects";
 import './globals.css';
 
 export default function Home() {
-  // useEffect(() => {
-  //   document.addEventListener('contextmenu', (e) => e.preventDefault());
-    
-  //   return () => {
-  //     document.removeEventListener('contextmenu', (e) => e.preventDefault());
-  //   };
-  // }, []);
 
   return (
     <main className="custom-cursor flex flex-col justify-center items-center overflow-hidden mx-auto sm:px-10 px-5">
-      <section>
+      <section id='hero'>
         <Hero/>
       </section>
-      <section>
+      <section id='projects'>
         <Projects/>
       </section>
     </main>
