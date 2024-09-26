@@ -44,7 +44,7 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
         <div className='relative'>
           <button 
             onClick={goBackToProjects} 
-            className='absolute -top-9 left-0 flex items-center text-sm bg-lightGray rounded-xl px-2 py-1 hover:bg-grayISH justify-center shadow-sm border-2 border-lightGray hover:border-grayISH'
+            className='absolute -top-9 left-0 flex items-center text-sm bg-lightGray rounded-xl px-2 py-1 hover:bg-grayISH justify-center shadow-sm border-2 border-lightGray hover:border-grayISH cursor-custom-default' 
           >
             <img src="/icons/left.svg" alt="Go Back" className="w-4 h-4" />
             Go Back
@@ -68,13 +68,13 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
             <div className="absolute bottom-4 right-4 flex space-x-2">
               <button
                 onClick={prevImage}
-                className='border border-border bg-lightGray rounded-full w-8 h-8 flex justify-center items-center'
+                className='border border-border bg-lightGray rounded-full w-8 h-8 flex justify-center items-center cursor-custom-default' 
               >
                 <img src="/icons/left.svg" alt="Previous" className="w-6 h-6" />
               </button>
               <button
                 onClick={nextImage}
-                className='border border-border bg-lightGray rounded-full w-8 h-8 flex justify-center items-center'
+                className='border border-border bg-lightGray rounded-full w-8 h-8 flex justify-center items-center cursor-custom-default' 
               >
                 <img src="/icons/right.svg" alt="Next" className="w-6 h-6" />
               </button>
