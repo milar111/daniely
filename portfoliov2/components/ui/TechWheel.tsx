@@ -16,18 +16,18 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
       if (window.innerWidth > 1024) {
         setCurrentSize(size.lg);  // Large screen
       } else if (window.innerWidth > 768) {
-        setCurrentSize(Math.max(size.lg - 50, 200));  // Medium screen with minimum size
+        setCurrentSize(size.lg - 50);
       } else {
-        setCurrentSize(Math.max(size.sm, 150));  // Small screen with minimum size
+        setCurrentSize(size.sm);
       }
     };
 
     window.addEventListener('resize', handleResize);
-    handleResize(); // Set the initial size on load
+    handleResize(); 
     return () => window.removeEventListener('resize', handleResize);
   }, [size]);
 
-  const outerCircleRadius = (currentSize / 2) - 15 - 5; 
+  const outerCircleRadius = currentSize / 2.5;
   const innerCircleRadius = currentSize / 4;
   const iconRadius = 15; 
   const centerX = currentSize / 2;
