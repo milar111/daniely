@@ -52,24 +52,28 @@ const Projects = () => {
             setCurrentImageIndex((prevIndex) => (prevIndex - 1 + project.image.length) % project.image.length);
           };
 
+          // Determine animation based on screen size
+          const cardAnimation = windowWidth > 1024 ? {
+            initial: { opacity: 0, x: initialX },
+            animate: { opacity: inView ? [0, 0.5, 1] : 0, x: inView ? 0 : initialX },
+            transition: { x: { duration: 0.5, ease: 'easeOut' }, opacity: { duration: 0.5, ease: 'easeOut', delay: 0.25 } }
+          } : {
+            initial: { opacity: 0 },
+            animate: { opacity: inView ? 1 : 0 },
+            transition: { opacity: { duration: 0.5, ease: 'easeOut' } }
+          };
+
           return (
             <motion.div
               ref={ref}
-              initial={{ opacity: 0, x: initialX }}
-              animate={{
-                opacity: inView ? [0, 0.5, 1] : 0,
-                x: inView ? 0 : initialX,
-              }}
-              transition={{
-                x: { duration: 0.5, ease: 'easeOut' },
-                opacity: { duration: 0.5, ease: 'easeOut', delay: 0.25 },
-              }}
+              initial={cardAnimation.initial}
+              animate={cardAnimation.animate}
+              transition={cardAnimation.transition}
               key={index}
               onClick={() => handleProjectClick(project.id)}
               className="bg-lightGray border-[2px] shadow-bottom-left border-borderProject rounded-2xl p-5 flex flex-col relative 
               filter grayscale hover:grayscale-0 transition duration-500 w-full max-w-[400px] h-[470px] cursor-custom-card"
             >
-
               <div
                 className='bg-grayISH w-full h-[224px] rounded-2xl border-black flex justify-center items-center mb-4 relative overflow-hidden'
                 onClick={(e) => handleProjectClick(project.id)}

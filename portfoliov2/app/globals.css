@@ -9,6 +9,11 @@
   color: white;
 }
 
+/* ::selection {
+  color: #a9a9a9;
+} */
+
+
 @layer base {
   body {
     @apply cursor-custom-default;

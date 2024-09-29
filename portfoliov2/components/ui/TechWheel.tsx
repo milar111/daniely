@@ -9,17 +9,16 @@ interface TechWheelProps {
 }
 
 const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
-  const [currentSize, setCurrentSize] = useState(size.lg); // Default to lg size
+  const [currentSize, setCurrentSize] = useState(size.lg); 
 
-  // Resize event listener for window
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 1024) {
         setCurrentSize(size.lg);  // Large screen
       } else if (window.innerWidth > 768) {
-        setCurrentSize(size.lg - 50);  // Medium screen (slightly smaller)
+        setCurrentSize(Math.max(size.lg - 50, 200));  // Medium screen with minimum size
       } else {
-        setCurrentSize(size.sm);  // Small screen
+        setCurrentSize(Math.max(size.sm, 150));  // Small screen with minimum size
       }
     };
 
@@ -28,9 +27,9 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, [size]);
 
-  const outerCircleRadius = currentSize / 2.5;
+  const outerCircleRadius = (currentSize / 2) - 15 - 5; 
   const innerCircleRadius = currentSize / 4;
-  const iconRadius = 15; // Keep the original icon size
+  const iconRadius = 15; 
   const centerX = currentSize / 2;
   const centerY = currentSize / 2;
 
@@ -90,7 +89,7 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
                 cx={x + iconRadius}
                 cy={y + iconRadius}
                 r={iconRadius + 5}
-                fill= '#D9D9D9'
+                fill='#D9D9D9'
                 fillOpacity='0.9'
                 stroke='black'
                 strokeOpacity='0.36'
@@ -150,6 +149,9 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
           justify-content: center;
           align-items: center;
           animation: spin 95s linear infinite;
+          overflow: hidden; /* Prevent overflow */
+          width: ${currentSize}px;
+          height: ${currentSize}px;
         }
 
         @keyframes spin {
