@@ -38,7 +38,7 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
   };
 
   return (
-    <div className='py-20 relative min-h-screen flex flex-col justify-center items-center space-y-10 w-full px-10 xxsm:px-5'>
+    <div className='py-20 relative min-h-screen flex flex-col justify-center items-center space-y-10 w-full px-20 smlg:px-11 xxsm:px-5'>
       <div className='flex flex-col lg:flex-row w-full max-w-5xl space-x-0 lg:space-x-4 space-y-4 lg:space-y-0'>
         {/* Left Side: Image and Controls */}
         <div className='relative flex flex-col items-center'>
@@ -94,7 +94,7 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
                       zIndex: `${project.technologies.length - techIndex}`,
                       position: 'absolute',
                     }}
-                    className='border border-border bg-lightGray rounded-full w-11 h-11 flex justify-center items-center filter grayscale 
+                    className='border border-border bg-darkGray rounded-full w-11 h-11 flex justify-center items-center filter grayscale 
                     xxsm:w-9 xxsm:h-9'
                   >
                     {techIcon && (
