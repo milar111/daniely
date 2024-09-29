@@ -15,7 +15,7 @@ const Projects = () => {
   return (
     <div className='py-20 relative min-h-screen flex flex-col justify-center items-center space-y-10 w-full'>
       <div className="w-full flex flex-col items-center text-center mx-auto">
-        <h1 className="font-inconsolata lg:text-fontLG1 font-normal leading-tight text-[37px]">
+        <h1 className="font-inconsolata lg:text-4xl font-normal leading-tight text-3xl">
           <span>What I've Been Working On</span>
         </h1>
         <h1 className="font-inconsolata lg:text-fontLG2 font-light leading-tight pb-8 xsm:pb-2 text-[20px]">

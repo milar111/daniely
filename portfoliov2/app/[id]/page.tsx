@@ -38,10 +38,10 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
   };
 
   return (
-    <div className='py-20 relative min-h-screen flex flex-col justify-center items-center space-y-10 w-full'>
-      <div className='flex w-full max-w-5xl space-x-4'>
+    <div className='py-20 relative min-h-screen flex flex-col justify-center items-center space-y-10 w-full px-10 xxsm:px-5'>
+      <div className='flex flex-col lg:flex-row w-full max-w-5xl space-x-0 lg:space-x-4 space-y-4 lg:space-y-0'>
         {/* Left Side: Image and Controls */}
-        <div className='relative'>
+        <div className='relative flex flex-col items-center'>
           <button 
             onClick={goBackToProjects} 
             className='absolute -top-9 left-0 flex items-center text-sm bg-lightGray rounded-xl px-2 py-1 hover:bg-grayISH justify-center shadow-sm border-2 border-lightGray hover:border-grayISH cursor-custom-default' 
@@ -50,7 +50,7 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
             Go Back
           </button>
 
-          <div className='relative w-[470px] h-[440px] rounded-xl overflow-hidden shadow-lg border-lightGray border-2'>
+          <div className='relative w-full lg:w-[470px] h-[440px] rounded-xl overflow-hidden shadow-lg border-lightGray border-2'>
             <div className='relative w-full h-full'>
               {project.image.map((imgSrc, imgIndex) => (
                 <motion.img
@@ -65,23 +65,23 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
               ))}
             </div>
 
-            <div className="absolute bottom-4 right-4 flex space-x-2">
+            <div className="absolute bottom-4 right-4 flex space-x-1">
               <button
                 onClick={prevImage}
-                className='border border-border bg-lightGray rounded-full w-8 h-8 flex justify-center items-center cursor-custom-default' 
+                className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center xxsm:w-6 xxsm:h-6 cursor-custom-default' 
               >
-                <img src="/icons/left.svg" alt="Previous" className="w-6 h-6" />
+                <img src="/icons/left.svg" alt="Previous" className="w-6 h-6 flex items-center justify-center xxsm:w-5 xxsm:h-5" />
               </button>
               <button
                 onClick={nextImage}
-                className='border border-border bg-lightGray rounded-full w-8 h-8 flex justify-center items-center cursor-custom-default' 
+                className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center xxsm:w-6 xxsm:h-6 cursor-custom-default' 
               >
-                <img src="/icons/right.svg" alt="Next" className="w-6 h-6" />
+                <img src="/icons/right.svg" alt="Next" className="w-6 h-6 flex items-center justify-center xxsm:w-5 xxsm:h-5" />
               </button>
             </div>
 
             {/* Render technology icons */}
-            <div className='absolute bottom-16 left-3'>
+            <div className='absolute bottom-16 xxsm:bottom-[3.5rem] left-3'>
               {project.technologies.map((techId, techIndex) => {
                 const techIcon = icons.find(icon => icon.id === techId);
                 const translationX = windowWidth > 380 ? 35 * techIndex + 5 : 26 * techIndex + 5;
@@ -106,13 +106,11 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
             </div>
           </div>
         </div>
-
         {/* Right Side: Title, Brief Description, and Links */}
-        <div className='flex-1 flex flex-col justify-center items-start pl-2 space-y-6 relative'>
-          <h1 className='text-3xl font-bold'><span>{project.title}</span></h1>
+        <div className='flex-1 flex flex-col justify-center items-center lg:items-start lg:text-left pl-2 space-y-3 relative'>
+          <h1 className='font-inconsolata text-3xl text-center lg:text-left font-normal leading-tight'><span>{project.title}</span></h1>
           <div className='p-6 bg-grayISH bg-opacity-30 rounded-lg w-full flex justify-center items-center shadow-md h-full relative'>
-            <p className='text-sm text-center'><span>{project.briefDescription}</span></p>
-
+            <p className='font-inconsolata font-light leading-tight text-md text-center'><span>{project.briefDescription}</span></p>
             {/* Links to GitHub and YouTube in the bottom right */}
             <div className="absolute bottom-3 right-3 flex space-x-2">
               {project.GitHubLink && (
@@ -140,17 +138,21 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
 
       {/* Objectives and Goals Section */}
       <div className='mt-8 w-full max-w-5xl pb-8'>
-        <h1 className='text-3xl font-bold flex justify-center items-center pb-1'><span>Objectives and Goals</span></h1>
+        <h1 className='text-3xl font-inconsolata justify-center items-center text-center pb-3 font-normal leading-tight'>
+          <span>Objectives and Goals</span>
+        </h1>
         <div className='p-6 bg-grayISH bg-opacity-30 rounded-lg flex justify-center items-center shadow-md h-full '>
-          <p className='text-sm text-center'><span>{project.problemStatement}</span></p>
+          <p className='font-inconsolata font-light leading-tight text-md text-center'><span>{project.problemStatement}</span></p>
         </div>
       </div>
 
       {/* Features and Highlights */}
       <div className='mt-8 w-full max-w-5xl'>
-        <h1 className='text-3xl font-bold flex justify-center items-center pb-1'><span>Features and Highlights</span></h1>
+        <h1 className='font-inconsolata text-3xl justify-center items-center text-center pb-3 font-normal leading-tight'>
+          <span>Features and Highlights</span>
+        </h1>
         <div className='p-6 bg-grayISH bg-opacity-30 rounded-lg flex justify-center items-center shadow-md h-full '>
-          <p className='text-sm text-center'><span>{project.keyFeatures}</span></p>
+          <p className='font-inconsolata font-light leading-tight text-md text-center'><span>{project.keyFeatures}</span></p>
         </div>
       </div>
     </div>

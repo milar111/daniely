@@ -97,14 +97,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth }
 
       {/* Title and Description that won't trigger navigation on click */}
       <h1
-        className='text-2xl font-bold font-inconsolata xxsm:text-xl'
+        className='text-2xl font-normal font-inconsolata xxsm:text-xl'
         onClick={(e) => e.stopPropagation()} // Prevents click from opening the project page
       >
         <span>{project.title}</span>
       </h1>
 
       <h1
-        className='text-xl font-inconsolata text-fontLG2 font-normal xxsm:text-base'
+        className='text-xl font-inconsolata text-fontLG2 xxsm:text-base font-light'
         onClick={(e) => e.stopPropagation()} // Prevents click from opening the project page
       >
         <span>{project.description}</span>
