@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { icons } from '@/data';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 interface ProjectCardProps {
@@ -39,15 +40,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth }
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + project.image.length) % project.image.length);
   };
 
-  const cardAnimation = windowWidth > 1024 ? {
-    initial: { opacity: 0, x: initialX },
-    animate: { opacity: inView ? [0, 0.5, 1] : 0, x: inView ? 0 : initialX },
-    transition: { x: { duration: 0.5, ease: 'easeOut' }, opacity: { duration: 0.5, ease: 'easeOut', delay: 0.25 } }
-  } : {
-    initial: { opacity: 0 },
-    animate: { opacity: inView ? 1 : 0 },
-    transition: { opacity: { duration: 0.5, ease: 'easeOut' } }
-  };
+  const cardAnimation = windowWidth > 1024
+    ? {
+        initial: { opacity: 0, x: initialX },
+        animate: { opacity: inView ? [0, 0.5, 1] : 0, x: inView ? 0 : initialX },
+        transition: { x: { duration: 0.5, ease: 'easeOut' }, opacity: { duration: 0.5, ease: 'easeOut', delay: 0.25 } },
+      }
+    : {
+        initial: { opacity: 0 },
+        animate: { opacity: inView ? 1 : 0 },
+        transition: { opacity: { duration: 0.5, ease: 'easeOut' } },
+      };
 
   const handleProjectClick = () => {
     router.push(`/${project.id}`);
@@ -69,10 +72,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth }
       >
         <div className='relative w-full h-full'>
           {project.image.map((imgSrc, imgIndex) => (
-            <img
+            <Image
               key={imgIndex}
               src={imgSrc}
               alt={project.title}
+              fill
               className={`absolute h-full w-full object-cover rounded-2xl transition-opacity duration-500 
                 ${imgIndex === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}
             />
@@ -84,13 +88,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth }
             className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center xxsm:w-6 xxsm:h-6'
             onClick={prevImage} 
           >
-            <img src="./icons/left.svg" alt="Left Arrow" className="w-6 h-6 flex items-center justify-center xxsm:w-5 xxsm:h-5" />
+            <Image src="./icons/left.svg" alt="Left Arrow" width={24} height={24} />
           </div>
           <div
             className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center xxsm:w-6 xxsm:h-6'
             onClick={nextImage} 
           >
-            <img src="./icons/right.svg" alt="Right Arrow" className="w-6 h-6 flex items-center justify-center xxsm:w-5 xxsm:h-5" />
+            <Image src="./icons/right.svg" alt="Right Arrow" width={24} height={24} />
           </div>
         </div>
       </div>
@@ -127,7 +131,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth }
               xxsm:w-9 xxsm:h-9'
             >
               {techIcon && (
-                <img src={techIcon.icon} alt={techIcon.name} className="w-6 h-6 xxsm:w-5 xxsm:h-5" />
+                <Image src={techIcon.icon} alt={techIcon.name} width={24} height={24} />
               )}
             </div>
           );
@@ -142,7 +146,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth }
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()} // Prevents opening the project page when clicking on GitHub link
           >
-            <img src="./icons/github.svg" alt="GitHub" className="w-8 h-8 xxsm:w-6 xxsm:h-6" />
+            <Image src="./icons/github.svg" alt="GitHub" width={32} height={32} />
           </a>
         )}
         {project.YouTubeLink && (
@@ -152,7 +156,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth }
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()} // Prevents opening the project page when clicking on YouTube link
           >
-            <img src="./icons/youtube.svg" alt="YouTube" className="w-8 h-8 xxsm:w-6 xxsm:h-6" />
+            <Image src="./icons/youtube.svg" alt="YouTube" width={32} height={32} />
           </a>
         )}
       </div>

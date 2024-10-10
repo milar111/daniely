@@ -1,5 +1,6 @@
 import React from 'react';
 import { socialmedia, icons } from '@/data';
+import Image from 'next/image';
 import TechWheel from '../ui/TechWheel';
 
 const Hero = () => {
@@ -23,11 +24,14 @@ const Hero = () => {
                   className='bg-grayISH rounded-xl sm:w-10 sm:h-10 w-9 h-9 shadow-bottom-left flex justify-center items-center'
                 >
                   <a href={social.link} target='_blank' rel='noopener noreferrer'>
-                    <img
-                      src={icon?.icon}
-                      alt={social.name}
-                      style={{ width: `${social.width}px`, height: `${social.height}px` }}
-                    />
+                    {icon && (
+                      <Image
+                        src={icon.icon}
+                        alt={social.name}
+                        width={Number(social.width)} 
+                        height={Number(social.height)} 
+                      />
+                    )}
                   </a>
                 </div>
               );
