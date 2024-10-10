@@ -9,7 +9,7 @@ const Hero = () => {
       <div className='lg:grid lg:grid-cols-2 lg:items-center lg:gap-1 flex flex-col items-center justify-center text-center'>
         <div className='col-span-1 flex flex-col lg:mr-10 text-center lg:text-left'>
           <h1 className='font-inconsolata text-3xl lg:text-4xl font-normal leading-tight'>
-            <span>Hi, I’m Daniel Yordanov</span>
+            <span>Hi, Im Daniel Yordanov</span>
           </h1>
           <h1 className='font-inconsolata lg:text-fontLG2 text-[20px] font-light leading-tight xsm:text-lg'>
             <span>Computer Science student,</span><br />
