@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { icons } from '@/data';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import Image from 'next/image'; // Import Next.js Image component
+import Image from 'next/image';
 
 interface Project {
   id: string;
@@ -59,7 +59,7 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
             onClick={goBackToProjects}
             className='absolute -top-9 left-0 flex items-center text-sm bg-lightGray rounded-xl px-2 py-1 hover:bg-grayISH justify-center shadow-sm border-2 border-lightGray hover:border-grayISH cursor-custom-default'
           >
-            <Image src='/icons/left.svg' alt='Go Back' width={16} height={16} /> {/* Changed to Image */}
+            <Image src='./icons/left.svg' alt='Go Back' width={16} height={16} /> {/* Changed to Image */}
             Go Back
           </button>
 
@@ -76,8 +76,8 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
                   <Image
                     src={imgSrc}
                     alt={project.title}
-                    layout="fill" // fills the parent container
-                    objectFit="cover" // ensures image covers the whole area
+                    layout="fill" 
+                    objectFit="cover" 
                     className='rounded-xl'
                   />
                 </motion.div>
@@ -90,10 +90,10 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
                 className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center xxsm:w-6 xxsm:h-6 cursor-custom-default'
               >
                 <Image
-                  src='/icons/left.svg'
+                  src='./icons/left.svg'
                   alt='Previous'
                   width={24}
-                  height={24} // Changed to Image
+                  height={24} 
                 />
               </button>
               <button
@@ -101,10 +101,10 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
                 className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center xxsm:w-6 xxsm:h-6 cursor-custom-default'
               >
                 <Image
-                  src='/icons/right.svg'
+                  src='./icons/right.svg'
                   alt='Next'
                   width={24}
-                  height={24} // Changed to Image
+                  height={24} 
                 />
               </button>
             </div>
@@ -131,7 +131,7 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
                         src={techIcon.icon}
                         alt={techIcon.name}
                         width={24}
-                        height={24} // Changed to Image
+                        height={24} 
                         className='w-6 h-6 xxsm:w-5 xxsm:h-5'
                       />
                     )}
@@ -159,10 +159,10 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
                   rel='noopener noreferrer'
                 >
                   <Image
-                    src='/icons/github.svg'
+                    src='./icons/github.svg'
                     alt='GitHub'
                     width={32}
-                    height={32} // Changed to Image
+                    height={32} 
                     className='w-8 h-8 xxsm:w-6 xxsm:h-6'
                   />
                 </a>
@@ -174,10 +174,10 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
                   rel='noopener noreferrer'
                 >
                   <Image
-                    src='/icons/youtube.svg'
+                    src='./icons/youtube.svg'
                     alt='YouTube'
                     width={32}
-                    height={32} // Changed to Image
+                    height={32}
                     className='w-8 h-8 xxsm:w-6 xxsm:h-6'
                   />
                 </a>
