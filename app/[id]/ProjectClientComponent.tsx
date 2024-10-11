@@ -59,7 +59,7 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
             onClick={goBackToProjects}
             className='absolute -top-9 left-0 flex items-center text-sm bg-lightGray rounded-xl px-2 py-1 hover:bg-grayISH justify-center shadow-sm border-2 border-lightGray hover:border-grayISH cursor-custom-default'
           >
-            <Image src='./icons/left.svg' alt='Go Back' width={16} height={16} /> {/* Changed to Image */}
+            <Image src='./icons/left.svg' alt='Go Back' width={16} height={16} />
             Go Back
           </button>
 
