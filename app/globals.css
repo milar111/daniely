@@ -28,19 +28,19 @@
   }
 
   .cursor-custom-card {
-    cursor: url('/cursor/default.svg'), pointer;
+    cursor: url('./cursor/default.svg'), pointer;
   }
 
   .cursor-custom-default {
-    cursor: url('/cursor/default.svg'), auto;
+    cursor: url('./cursor/default.svg'), auto;
   }
 
   .cursor-custom-text {
-    cursor: url('/cursor/text.svg'), text;
+    cursor: url('./cursor/text.svg'), text;
   }
 
   .cursor-custom-link {
-    cursor: url('/cursor/link.svg'), pointer;
+    cursor: url('./cursor/link.svg'), pointer;
 
   }
 }
