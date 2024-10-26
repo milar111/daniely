@@ -148,7 +148,7 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
             <span>{project.title}</span>
           </h1>
           <div className='p-6 bg-grayISH bg-opacity-30 rounded-lg w-full flex justify-center items-center shadow-md h-full relative'>
-            <p className='font-inconsolata font-light leading-tight text-md text-center px-20 smlg:px-1 '>
+            <p className='font-inconsolata font-light leading-tight text-md text-center px-12'>
               <span>{project.briefDescription}</span>
             </p>
             <div className='absolute bottom-3 right-3 flex space-x-2'>
@@ -192,7 +192,7 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
         <h1 className='text-3xl font-inconsolata justify-center items-center text-center pb-3 font-normal leading-tight'>
           <span>Objectives and Goals</span>
         </h1>
-        <div className='p-6 bg-grayISH bg-opacity-30 rounded-lg flex justify-center items-center shadow-md h-full px-36 smlg:px-10'>
+        <div className='p-6 bg-grayISH bg-opacity-30 rounded-lg flex justify-center items-center shadow-md h-full px-36'>
           <p className='font-inconsolata font-light leading-tight text-md text-center'>
             <span>{project.problemStatement}</span>
           </p>
@@ -204,7 +204,7 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
         <h1 className='font-inconsolata text-3xl justify-center items-center text-center pb-3 font-normal leading-tight'>
           <span>Features and Highlights</span>
         </h1>
-        <div className='p-6 bg-grayISH bg-opacity-30 rounded-lg flex justify-center items-center shadow-md h-full px-36 smlg:px-10'>
+        <div className='p-6 bg-grayISH bg-opacity-30 rounded-lg flex justify-center items-center shadow-md h-full px-36'>
           <p className='font-inconsolata font-light leading-tight text-md text-center'>
             <span>{project.keyFeatures}</span>
           </p>
