@@ -22,20 +22,42 @@
     @apply cursor-custom-link;
   }
 
-  .cursor-custom-card {
-    cursor: url('/cursor/default.svg'), pointer;
+  /* For production */
+  @media (min-width: 0px) {
+    .cursor-custom-card {
+      cursor: url('/daniely/cursor/default.svg'), pointer;
+    }
+
+    .cursor-custom-default {
+      cursor: url('/daniely/cursor/default.svg'), auto;
+    }
+
+    .cursor-custom-text {
+      cursor: url('/daniely/cursor/text.svg'), text;
+    }
+
+    .cursor-custom-link {
+      cursor: url('/daniely/cursor/link.svg'), pointer;
+    }
   }
 
-  .cursor-custom-default {
-    cursor: url('/cursor/default.svg'), auto;
-  }
+  /* For local development */
+  @media (min-width: 0px) {
+    .cursor-custom-card {
+      cursor: url('/cursor/default.svg'), pointer;
+    }
 
-  .cursor-custom-text {
-    cursor: url('/cursor/text.svg'), text;
-  }
+    .cursor-custom-default {
+      cursor: url('/cursor/default.svg'), auto;
+    }
 
-  .cursor-custom-link {
-    cursor: url('/cursor/link.svg'), pointer;
+    .cursor-custom-text {
+      cursor: url('/cursor/text.svg'), text;
+    }
+
+    .cursor-custom-link {
+      cursor: url('/cursor/link.svg'), pointer;
+    }
   }
 }
 
