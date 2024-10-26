@@ -1,11 +1,10 @@
-"use client"; // Mark the component as a Client Component
-
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const metadata = {
+export const metadata: Metadata = {
   title: "Daniel Yordanov",
   description: "Portfolio website.",
 };
@@ -17,10 +16,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );

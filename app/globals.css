@@ -9,6 +9,10 @@
   color: white;
 }
 
+/* ::selection {
+  color: #a9a9a9;
+} */
+
 @layer base {
   body {
     @apply cursor-custom-default;
@@ -22,42 +26,20 @@
     @apply cursor-custom-link;
   }
 
-  /* For production */
-  @media (min-width: 0px) {
-    .cursor-custom-card {
-      cursor: url('/daniely/cursor/default.svg'), pointer;
-    }
-
-    .cursor-custom-default {
-      cursor: url('/daniely/cursor/default.svg'), auto;
-    }
-
-    .cursor-custom-text {
-      cursor: url('/daniely/cursor/text.svg'), text;
-    }
-
-    .cursor-custom-link {
-      cursor: url('/daniely/cursor/link.svg'), pointer;
-    }
+  .cursor-custom-card {
+    cursor: url('/daniely/cursor/default.svg'), pointer;
   }
 
-  /* For local development */
-  @media (min-width: 0px) {
-    .cursor-custom-card {
-      cursor: url('/cursor/default.svg'), pointer;
-    }
+  .cursor-custom-default {
+    cursor: url('/daniely/cursor/default.svg'), auto;
+  }
 
-    .cursor-custom-default {
-      cursor: url('/cursor/default.svg'), auto;
-    }
+  .cursor-custom-text {
+    cursor: url('/daniely/cursor/text.svg'), text;
+  }
 
-    .cursor-custom-text {
-      cursor: url('/cursor/text.svg'), text;
-    }
-
-    .cursor-custom-link {
-      cursor: url('/cursor/link.svg'), pointer;
-    }
+  .cursor-custom-link {
+    cursor: url('/daniely/cursor/link.svg'), pointer;
   }
 }
 
