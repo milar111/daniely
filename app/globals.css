@@ -13,7 +13,6 @@
   color: #a9a9a9;
 } */
 
-
 @layer base {
   body {
     @apply cursor-custom-default;
@@ -27,8 +26,7 @@
     @apply cursor-custom-link;
   }
 
-  /* for deployment */
-
+  /* deployment */
   .cursor-custom-card {
     cursor: url('/daniely/cursor/default.svg'), pointer;
   }
@@ -43,10 +41,10 @@
 
   .cursor-custom-link {
     cursor: url('/daniely/cursor/link.svg'), pointer;
-
   }
 
-  /* For local host */
+
+  /* local host */
 
   /* .cursor-custom-card {
     cursor: url('/cursor/default.svg'), pointer;
@@ -62,19 +60,17 @@
 
   .cursor-custom-link {
     cursor: url('/cursor/link.svg'), pointer;
-
-    } */
-  }
+  } */
 
 
-
+}
 
 ::-webkit-scrollbar {
-  width: 12px; 
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f4f4f5; 
+  background: #f4f4f5;
   border-radius: 6px;
 }
 
@@ -85,5 +81,5 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #4b5563; 
+  background-color: #4b5563;
 }
