@@ -2,10 +2,10 @@
 const nextConfig = {
   output: "export",
   images: {
-    unoptimized: true, // Disable Image Optimization for static export
+    unoptimized: true,
   },
-  basePath: '/daniely', // Add repository name for GitHub Pages
-  assetPrefix: '/daniely/', // Ensure asset paths are prefixed with repository name
+  basePath: process.env.NODE_ENV === 'production' ? '/daniely' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/daniely/' : '',
 };
 
 export default nextConfig;
