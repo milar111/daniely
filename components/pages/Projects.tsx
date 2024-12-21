@@ -18,10 +18,10 @@ const Projects = () => {
     <div className="py-20 relative min-h-screen flex flex-col justify-center items-center space-y-10 w-full">
       <div className="w-full flex flex-col items-center text-center mx-auto">
         <h1 className="font-inconsolata lg:text-4xl font-normal leading-tight text-3xl">
-          <span>What I've Been Working On</span>
+          <span>What I&#39;ve Been Working On</span>
         </h1>
         <h1 className="font-inconsolata lg:text-fontLG2 font-light leading-tight pb-8 xsm:pb-2 text-[20px]">
-          <span>Certain projects aren't listed</span>
+          <span>Certain projects aren&#39;t listed</span>
           <br />
           <span>due to confidentiality.</span>
         </h1>
@@ -31,18 +31,14 @@ const Projects = () => {
         {projects.map((project, index) => {
           const isLastOddCard = isOdd && index === projects.length - 1;
 
-          if (isOdd && index === projects.length - 1) {
-            // Render the last project in the center with fade-in animation from top to bottom
+          if (isLastOddCard) {
             return (
-              <div
-                key={index}
-                className="lg:col-span-2 flex justify-center"
-              >
+              <div key={index} className="lg:col-span-2 flex justify-center">
                 <ProjectCard project={project} index={index} windowWidth={windowWidth} isLastOddCard={isLastOddCard} />
               </div>
             );
           }
-          // Render all other projects normally
+
           return <ProjectCard key={index} project={project} index={index} windowWidth={windowWidth} />;
         })}
       </div>
