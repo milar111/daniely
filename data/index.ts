@@ -96,6 +96,11 @@ export const icons = [
         id: '18',
         name: "Selenium",
         icon: "./icons/selenium.svg",
+    },
+    {
+        id: '19',
+        name: "ZMK",
+        icon: "./icons/zmk.svg",
     }
 ];
 
@@ -156,6 +161,19 @@ export const socialmedia = [
 
   export const projects = [
     {
+        id: 'Corne',
+        image: ['./images/Corne/im1.jpg', './images/Corne/im2.jpg', './images/Corne/im3.jpg'],
+        title: 'Corne',
+        description: 'Wireless Ergonomic Split Keyboard. Budget-friendly keyboard based on the Corne layout.',
+        GitHubLink: 'https://github.com/milar111/Corne',
+        YouTubeLink: '',
+        technologies: ["19"],
+        briefDescription: "This project showcases a DIY wireless split keyboard built around the Corne layout using affordable Pro Micro nRF52840 controllers. It features Bluetooth functionality, ZMK firmware, and a low-profile, ergonomic design tailored for comfort and portability.",
+        problemStatement: "Traditional wireless ergonomic keyboards are often expensive, limiting accessibility for enthusiasts and hobbyists. This project solves this by offering a cost-effective DIY alternative that maintains functionality, comfort, and reliability.",
+        keyFeatures: "This DIY wireless split keyboard offers fully wireless functionality through Bluetooth connectivity and features an ergonomic split design based on the Corne layout. Its low-profile build ensures portability, while the use of Pro Micro nRF52840 controllers provides cost efficiency and reliability. Powered by ZMK firmware, it allows extensive customization, and its energy-efficient design ensures a battery life of over one month.",
+    },
+
+    {
         id: 'MacroKeyboard',
         image: ['./images/MacroKeyboard/im1.png', './images/MacroKeyboard/im2.png', './images/MacroKeyboard/im3.png', './images/MacroKeyboard/im4.png'],
         title: 'MacroKeyboard',
@@ -167,6 +185,8 @@ export const socialmedia = [
         problemStatement: "The project addresses the need for a multifunctional tool that combines input devices, such as keypads and rotary encoders, with visual feedback on an OLED screen. It offers a compact solution for custom keyboard shortcuts, system information display, and media control, enhancing productivity and user interaction.",
         keyFeatures: "Custom Keypad Interface: Program each key to perform specific actions like sending keystrokes or launching apps.OLED Display: Shows real-time data (e.g., time, temperature) and includes a Dino game. Volume Control: Adjust the system volume using a rotary encoder with mute functionality. Dino Game: A simple game displayed on the OLED and controlled via the keypad.",
     },
+
+
     {
         id: 'LOID_V1',
         image: ['./images/LOID_V1/im1.png', './images/LOID_V1/im2.png'],

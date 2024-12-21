@@ -27,7 +27,28 @@
     @apply cursor-custom-link;
   }
 
+  /* for deployment */
+
   .cursor-custom-card {
+    cursor: url('/daniely/cursor/default.svg'), pointer;
+  }
+
+  .cursor-custom-default {
+    cursor: url('/daniely/cursor/default.svg'), auto;
+  }
+
+  .cursor-custom-text {
+    cursor: url('/daniely/cursor/text.svg'), text;
+  }
+
+  .cursor-custom-link {
+    cursor: url('/daniely/cursor/link.svg'), pointer;
+
+  }
+
+  /* For local host */
+
+  /* .cursor-custom-card {
     cursor: url('/cursor/default.svg'), pointer;
   }
 
@@ -42,8 +63,8 @@
   .cursor-custom-link {
     cursor: url('/cursor/link.svg'), pointer;
 
+    } */
   }
-}
 
 
 

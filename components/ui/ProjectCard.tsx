@@ -17,9 +17,10 @@ interface ProjectCardProps {
   };
   index: number;
   windowWidth: number;
+  isLastOddCard?: boolean; // New prop to differentiate the last card
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, isLastOddCard }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const router = useRouter();
   const { ref, inView } = useInView({
@@ -40,7 +41,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth }
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + project.image.length) % project.image.length);
   };
 
-  const cardAnimation = windowWidth > 1024
+  const cardAnimation = isLastOddCard
+    ? {
+        initial: { opacity: 0, y: '-10%' },
+        animate: { opacity: inView ? 1 : 0, y: inView ? 0 : '-10%' },
+        transition: { y: { duration: 0.5, ease: 'easeOut' }, opacity: { duration: 0.5, ease: 'easeOut', delay: 0.25 } },
+      }
+    : windowWidth > 1024
     ? {
         initial: { opacity: 0, x: initialX },
         animate: { opacity: inView ? [0, 0.5, 1] : 0, x: inView ? 0 : initialX },
