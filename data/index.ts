@@ -162,7 +162,7 @@ export const socialmedia = [
   export const projects = [
     {
         id: 'Corne',
-        image: ['/images/Corne/im1.jpg', '/images/Corne/im2.jpg', '/images/Corne/im3.jpg'],
+        image: ['./images/Corne/im1.jpg', './images/Corne/im2.jpg', './images/Corne/im3.jpg'],
         title: 'Corne',
         description: 'Wireless Ergonomic Split Keyboard. Budget-friendly keyboard based on the Corne layout.',
         GitHubLink: 'https://github.com/milar111/Corne',
@@ -175,7 +175,7 @@ export const socialmedia = [
 
     {
         id: 'MacroKeyboard',
-        image: ['/images/MacroKeyboard/im1.png', '/images/MacroKeyboard/im2.png', '/images/MacroKeyboard/im3.png', '/images/MacroKeyboard/im4.png'],
+        image: ['./images/MacroKeyboard/im1.png', './images/MacroKeyboard/im2.png', './images/MacroKeyboard/im3.png', './images/MacroKeyboard/im4.png'],
         title: 'MacroKeyboard',
         description: 'MacroKeyboard controls volume, sends keystrokes, and displays real-time info.',
         GitHubLink: 'https://github.com/milar111/MacroKeyboard-MFMKWCM-',
@@ -189,7 +189,7 @@ export const socialmedia = [
 
     {
         id: 'LOID_V1',
-        image: ['/images/LOID_V1/im1.png', '/images/LOID_V1/im2.png'],
+        image: ['./images/LOID_V1/im1.png', './images/LOID_V1/im2.png'],
         title: 'LOID_V1',
         description: 'LOID automates student logins and logouts on Google Classroom efficiently.',
         GitHubLink: 'https://github.com/milar111/LOID_prototype1',
@@ -202,7 +202,7 @@ export const socialmedia = [
     
     {
         id: 'OmniCar',
-        image: ['/images/OmniCar/im1.png', '/images/OmniCar/im2.png'],
+        image: ['./images/OmniCar/im1.png', './images/OmniCar/im2.png'],
         title: 'OmniCar',
         description: 'Wireless omnidirectional robot controlled via web interface using ESP.',
         GitHubLink: 'https://github.com/milar111/OmniCar',
@@ -215,7 +215,7 @@ export const socialmedia = [
 
     {
         id: 'SunFollower',
-        image: ['/images/SunFollower/im1.png', '/images/SunFollower/im2.png', '/images/SunFollower/im3.png'],
+        image: ['./images/SunFollower/im1.png', './images/SunFollower/im2.png', './images/SunFollower/im3.png'],
         title: 'SunFollower',
         description: 'Solar-following robot maximizes energy from solar panels.',
         GitHubLink: '',
