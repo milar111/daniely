@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { icons } from '@/data';
 import Image from 'next/image';
@@ -23,13 +22,10 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, isLastOddCard }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const router = useRouter();
-  const { ref, inView } = useInView({
+  const { ref } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-
-  const isLeftCard = index % 2 === 0;
-  const initialX = isLeftCard ? '-15%' : '15%';
 
   const nextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -41,43 +37,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + project.image.length) % project.image.length);
   };
 
-  const cardAnimation = isLastOddCard
-    ? {
-        initial: { opacity: 0, y: '-10%' },
-        animate: { opacity: inView ? 1 : 0, y: inView ? 0 : '-10%' },
-        transition: { y: { duration: 0.5, ease: 'easeOut' }, opacity: { duration: 0.5, ease: 'easeOut', delay: 0.25 } },
-      }
-    : windowWidth > 1024
-    ? {
-        initial: { opacity: 0, x: initialX },
-        animate: { opacity: inView ? [0, 0.5, 1] : 0, x: inView ? 0 : initialX },
-        transition: { x: { duration: 0.5, ease: 'easeOut' }, opacity: { duration: 0.5, ease: 'easeOut', delay: 0.25 } },
-      }
-    : {
-        initial: { opacity: 0 },
-        animate: { opacity: inView ? 1 : 0 },
-        transition: { opacity: { duration: 0.5, ease: 'easeOut' } },
-      };
-
   const handleProjectClick = () => {
     router.push(`/${project.id}`);
   };
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial={cardAnimation.initial}
-      animate={cardAnimation.animate}
-      transition={cardAnimation.transition}
       onClick={handleProjectClick}
       className="bg-lightGray border-[2px] shadow-bottom-left border-borderProject rounded-2xl p-5 flex flex-col relative 
       filter grayscale hover:grayscale-0 transition duration-500 w-full max-w-[400px] h-[470px] cursor-custom-card"
     >
       <div
-        className='bg-grayISH w-full h-[224px] rounded-2xl border-black flex justify-center items-center mb-4 relative overflow-hidden'
+        className="bg-grayISH w-full h-[224px] rounded-2xl border-black flex justify-center items-center mb-4 relative overflow-hidden"
         onClick={handleProjectClick}
       >
-        <div className='relative w-full h-full'>
+        <div className="relative w-full h-full">
           {project.image.map((imgSrc, imgIndex) => (
             <Image
               key={imgIndex}
@@ -92,14 +67,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
 
         <div className="absolute bottom-4 right-4 flex space-x-1">
           <div
-            className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center xxsm:w-6 xxsm:h-6'
-            onClick={prevImage} 
+            className="border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center xxsm:w-6 xxsm:h-6"
+            onClick={prevImage}
           >
             <Image src="./icons/left.svg" alt="Left Arrow" width={24} height={24} />
           </div>
           <div
-            className='border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center xxsm:w-6 xxsm:h-6'
-            onClick={nextImage} 
+            className="border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center xxsm:w-6 xxsm:h-6"
+            onClick={nextImage}
           >
             <Image src="./icons/right.svg" alt="Right Arrow" width={24} height={24} />
           </div>
@@ -108,22 +83,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
 
       {/* Title and Description that won't trigger navigation on click */}
       <h1
-        className='text-2xl font-normal font-inconsolata xxsm:text-xl'
+        className="text-2xl font-normal font-inconsolata xxsm:text-xl"
         onClick={(e) => e.stopPropagation()} // Prevents click from opening the project page
       >
         <span>{project.title}</span>
       </h1>
 
       <h1
-        className='text-xl font-inconsolata text-fontLG2 xxsm:text-base font-light'
+        className="text-xl font-inconsolata text-fontLG2 xxsm:text-base font-light"
         onClick={(e) => e.stopPropagation()} // Prevents click from opening the project page
       >
         <span>{project.description}</span>
       </h1>
 
-      <div className='absolute bottom-16 xxsm:bottom-[3.5rem] left-3'>
+      <div className="absolute bottom-16 xxsm:bottom-[3.5rem] left-3">
         {project.technologies.map((techId, techIndex) => {
-          const techIcon = icons.find(icon => icon.id === techId);
+          const techIcon = icons.find((icon) => icon.id === techId);
           const translationX = windowWidth > 380 ? 35 * techIndex + 5 : 26 * techIndex + 5;
 
           return (
@@ -134,8 +109,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
                 zIndex: `${project.technologies.length - techIndex}`,
                 position: 'absolute',
               }}
-              className='border border-border bg-darkGray rounded-full w-11 h-11 flex justify-center items-center filter grayscale 
-              xxsm:w-9 xxsm:h-9'
+              className="border border-border bg-darkGray rounded-full w-11 h-11 flex justify-center items-center filter grayscale 
+              xxsm:w-9 xxsm:h-9"
             >
               {techIcon && (
                 <Image src={techIcon.icon} alt={techIcon.name} width={24} height={24} />
@@ -147,9 +122,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
 
       <div className="absolute bottom-6 right-6 flex space-x-1">
         {project.GitHubLink && (
-          <a 
-            href={project.GitHubLink} 
-            target="_blank" 
+          <a
+            href={project.GitHubLink}
+            target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()} // Prevents opening the project page when clicking on GitHub link
           >
@@ -157,9 +132,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
           </a>
         )}
         {project.YouTubeLink && (
-          <a 
-            href={project.YouTubeLink} 
-            target="_blank" 
+          <a
+            href={project.YouTubeLink}
+            target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()} // Prevents opening the project page when clicking on YouTube link
           >
@@ -167,7 +142,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
           </a>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
