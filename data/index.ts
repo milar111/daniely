@@ -128,7 +128,7 @@ export const socialmedia = [
     {
         id: '1',
         name: 'Instagram',
-        link: 'https://www.instagram.com/danielyordanov101/',
+        link: 'https://www.instagram.com/danielyordanov79/',
         iconId: '6',
         width: '33',
         height: '33',
@@ -144,7 +144,7 @@ export const socialmedia = [
     {
         id: '3',
         name: 'YouTube',
-        link: 'https://www.youtube.com/@DanielYordanov101',
+        link: 'https://www.youtube.com/',
         iconId: '16',
         width: '35',
         height: '35',
