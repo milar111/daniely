@@ -30,8 +30,12 @@ const Hero = () => {
                     <Image
                       src={icon.icon}
                       alt={social.name}
-                      width={Number(social.width)} 
-                      height={Number(social.height)} 
+                      width={Number(social.width)}
+                      height={Number(social.height)}
+                      loading="eager"
+                      priority={true}
+                      quality={90}
+                      className="object-contain"
                     />
                   )}
                 </a>

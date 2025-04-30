@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { icons, technologies } from '@/data';
+import Image from 'next/image';
 
 interface TechWheelProps {
   size: {
@@ -10,6 +11,7 @@ interface TechWheelProps {
 
 const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
   const [currentSize, setCurrentSize] = useState(size.lg);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
@@ -44,7 +46,7 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
         viewBox={`0 0 ${currentSize} ${currentSize}`}
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Outer Circle Rotating Counterclockwise */}
+        {/* Outer Circle */}
         <g style={{ transformOrigin: `${centerX}px ${centerY}px`, animation: `outerSpin 95s linear infinite` }}>
           <circle
             cx={centerX}
@@ -73,23 +75,37 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
                   strokeOpacity='0.36'
                   strokeWidth="1"
                 />
-                <image
-                  href={techIcon?.icon}
-                  x={x}
-                  y={y}
-                  width={iconRadius * 2}
-                  height={iconRadius * 2}
-                  style={{
-                    transformOrigin: `${x + iconRadius}px ${y + iconRadius}px`,
+                <foreignObject x={x} y={y} width={iconRadius * 2} height={iconRadius * 2}>
+                  <div style={{
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    transformOrigin: 'center',
                     animation: `counterRotation 95s linear infinite`,
-                  }}
-                />
+                  }}>
+                    {techIcon && (
+                      <Image
+                        src={techIcon.icon}
+                        alt={techId}
+                        width={iconRadius * 2}
+                        height={iconRadius * 2}
+                        loading="eager"
+                        priority={true}
+                        quality={90}
+                        className="object-contain"
+                        onLoadingComplete={() => setIsLoading(false)}
+                      />
+                    )}
+                  </div>
+                </foreignObject>
               </g>
             );
           })}
         </g>
 
-        {/* Inner Circle Rotating Clockwise */}
+        {/* Inner Circle */}
         <g style={{ transformOrigin: `${centerX}px ${centerY}px`, animation: `innerSpin 95s linear infinite` }}>
           <circle
             cx={centerX}
@@ -118,17 +134,31 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
                   strokeOpacity='0.36'
                   strokeWidth="1"
                 />
-                <image
-                  href={techIcon?.icon}
-                  x={x}
-                  y={y}
-                  width={iconRadius * 2}
-                  height={iconRadius * 2}
-                  style={{
-                    transformOrigin: `${x + iconRadius}px ${y + iconRadius}px`,
+                <foreignObject x={x} y={y} width={iconRadius * 2} height={iconRadius * 2}>
+                  <div style={{
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    transformOrigin: 'center',
                     animation: `clockwiseRotation 95s linear infinite`,
-                  }}
-                />
+                  }}>
+                    {techIcon && (
+                      <Image
+                        src={techIcon.icon}
+                        alt={techId}
+                        width={iconRadius * 2}
+                        height={iconRadius * 2}
+                        loading="eager"
+                        priority={true}
+                        quality={90}
+                        className="object-contain"
+                        onLoadingComplete={() => setIsLoading(false)}
+                      />
+                    )}
+                  </div>
+                </foreignObject>
               </g>
             );
           })}
@@ -162,7 +192,6 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
           }
         }
 
-        /* Reverse the rotation to keep icons level */
         @keyframes counterRotation {
           from {
             transform: rotate(0deg);
