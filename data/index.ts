@@ -215,7 +215,7 @@ export const socialmedia = [
 
     {
         id: 'SunFollower',
-        image: ['./images/SunFollower/im1.png', './images/SunFollower/im2.png', './images/SunFollower/im3.png'],
+        image: ['./images/SunFollower/im1.png', './images/SunFollower/im2.png', './images/SunFollower/im3.png', './images/SunFollower/im4.png'],
         title: 'SunFollower',
         description: 'Solar-following robot maximizes energy from solar panels.',
         GitHubLink: '',
