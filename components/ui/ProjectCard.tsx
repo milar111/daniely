@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import { icons } from '@/data';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 interface ProjectCardProps {
   project: {
@@ -16,7 +17,7 @@ interface ProjectCardProps {
   };
   index: number;
   windowWidth: number;
-  isLastOddCard?: boolean; // New prop to differentiate the last card
+  isLastOddCard?: boolean;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, isLastOddCard }) => {
@@ -42,11 +43,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
   };
 
   return (
-    <div
+    <motion.div
       ref={ref}
       onClick={handleProjectClick}
       className="bg-lightGray border-[2px] shadow-bottom-left border-borderProject rounded-2xl p-5 flex flex-col relative 
-      filter grayscale hover:grayscale-0 transition duration-500 w-full max-w-[400px] h-[470px] cursor-custom-card"
+      filter grayscale hover:grayscale-0 transition-all duration-300 w-full max-w-[400px] h-[470px] cursor-custom-card"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
       <div
         className="bg-grayISH w-full h-[224px] rounded-2xl border-black flex justify-center items-center mb-4 relative overflow-hidden"
@@ -54,18 +58,29 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
       >
         <div className="relative w-full h-full">
           {project.image.map((imgSrc, imgIndex) => (
-            <Image
+            <motion.div
               key={imgIndex}
-              src={imgSrc}
-              alt={project.title}
-              fill
-              className={`absolute h-full w-full object-cover rounded-2xl transition-opacity duration-500 
-                ${imgIndex === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}
-            />
+              initial={{ opacity: 0 }}
+              animate={{ opacity: imgIndex === currentImageIndex ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              className="absolute w-full h-full"
+            >
+              <Image
+                src={imgSrc}
+                alt={project.title}
+                fill
+                className="object-cover rounded-2xl"
+              />
+            </motion.div>
           ))}
         </div>
 
-        <div className="absolute bottom-4 right-4 flex space-x-1">
+        <motion.div 
+          className="absolute bottom-4 right-4 flex space-x-1"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
           <div
             className="border border-border bg-darkGray rounded-full w-7 h-7 flex justify-center items-center xxsm:w-6 xxsm:h-6"
             onClick={prevImage}
@@ -78,23 +93,28 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
           >
             <Image src="./icons/right.svg" alt="Right Arrow" width={24} height={24} />
           </div>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Title and Description that won't trigger navigation on click */}
-      <h1
+      <motion.h1
         className="text-2xl font-normal font-inconsolata xxsm:text-xl"
-        onClick={(e) => e.stopPropagation()} // Prevents click from opening the project page
+        onClick={(e) => e.stopPropagation()}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
       >
         <span>{project.title}</span>
-      </h1>
+      </motion.h1>
 
-      <h1
+      <motion.h1
         className="text-xl font-inconsolata text-fontLG2 xxsm:text-base font-light"
-        onClick={(e) => e.stopPropagation()} // Prevents click from opening the project page
+        onClick={(e) => e.stopPropagation()}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
       >
         <span>{project.description}</span>
-      </h1>
+      </motion.h1>
 
       <div className="absolute bottom-16 xxsm:bottom-[3.5rem] left-3">
         {project.technologies.map((techId, techIndex) => {
@@ -102,7 +122,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
           const translationX = windowWidth > 380 ? 35 * techIndex + 5 : 26 * techIndex + 5;
 
           return (
-            <div
+            <motion.div
               key={techIndex}
               style={{
                 transform: `translateX(${translationX}px)`,
@@ -111,38 +131,47 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
               }}
               className="border border-border bg-darkGray rounded-full w-11 h-11 flex justify-center items-center filter grayscale 
               xxsm:w-9 xxsm:h-9"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4 + techIndex * 0.1 }}
             >
               {techIcon && (
                 <Image src={techIcon.icon} alt={techIcon.name} width={24} height={24} />
               )}
-            </div>
+            </motion.div>
           );
         })}
       </div>
 
       <div className="absolute bottom-6 right-6 flex space-x-1">
         {project.GitHubLink && (
-          <a
+          <motion.a
             href={project.GitHubLink}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()} // Prevents opening the project page when clicking on GitHub link
+            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5 }}
           >
             <Image src="./icons/github.svg" alt="GitHub" width={32} height={32} />
-          </a>
+          </motion.a>
         )}
         {project.YouTubeLink && (
-          <a
+          <motion.a
             href={project.YouTubeLink}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()} // Prevents opening the project page when clicking on YouTube link
+            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6 }}
           >
             <Image src="./icons/youtube.svg" alt="YouTube" width={32} height={32} />
-          </a>
+          </motion.a>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

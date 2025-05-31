@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { projects } from '@/data';
 import ProjectCard from '../ui/ProjectCard';
+import { motion } from 'framer-motion';
 
 const Projects = () => {
   const [windowWidth, setWindowWidth] = useState<number>(0);
@@ -14,9 +15,36 @@ const Projects = () => {
 
   const isOdd = projects.length % 2 !== 0;
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <div className="py-20 relative min-h-screen flex flex-col justify-center items-center space-y-10 w-full">
-      <div className="w-full flex flex-col items-center text-center mx-auto">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="w-full flex flex-col items-center text-center mx-auto"
+      >
         <h1 className="font-inconsolata lg:text-4xl font-normal leading-tight text-3xl">
           <span>What I&#39;ve Been Working On</span>
         </h1>
@@ -25,23 +53,37 @@ const Projects = () => {
           <br />
           <span>due to confidentiality.</span>
         </h1>
-      </div>
+      </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-5 xsm:p-1">
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-5 xsm:p-1"
+      >
         {projects.map((project, index) => {
           const isLastOddCard = isOdd && index === projects.length - 1;
 
           if (isLastOddCard) {
             return (
-              <div key={index} className="lg:col-span-2 flex justify-center">
+              <motion.div 
+                key={index} 
+                variants={itemVariants}
+                className="lg:col-span-2 flex justify-center"
+              >
                 <ProjectCard project={project} index={index} windowWidth={windowWidth} isLastOddCard={isLastOddCard} />
-              </div>
+              </motion.div>
             );
           }
 
-          return <ProjectCard key={index} project={project} index={index} windowWidth={windowWidth} />;
+          return (
+            <motion.div key={index} variants={itemVariants}>
+              <ProjectCard project={project} index={index} windowWidth={windowWidth} />
+            </motion.div>
+          );
         })}
-      </div>
+      </motion.div>
     </div>
   );
 };
