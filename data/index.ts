@@ -174,6 +174,19 @@ export const socialmedia = [
     },
 
     {
+        id: 'AinmatronicEyes',
+        image: ['./images/AnimatronicEyes/im1.jpg', './images/AnimatronicEyes/im2.jpg', './images/AnimatronicEyes/im3.jpg', './images/AnimatronicEyes/im4.jpg'],
+        title: 'Animatronic Eyes',
+        description: 'Bluetooth controlled animatronic eyes system with realistic movements and animations.',
+        GitHubLink: 'https://github.com/milar111/AnimatronicEyes',
+        YouTubeLink: '',
+        technologies: ["0"],
+        briefDescription: "An ESP32-powered animatronic eyes system with servo-controlled movements and independent eyelid control, featuring custom 3D-printed components and Bluetooth gamepad integration.",
+        problemStatement: "Creating realistic animatronic eyes with just 4 servos requires precise control over multiple degrees of freedom while maintaining smooth, natural movements and reliable Bluetooth communication.",
+        keyFeatures: "• Full X/Y axis eye movement\n• Independent eyelid control\n• Bluetooth gamepad integration\n• Custom 3D-printed components\n• Servo calibration utilities",
+    },
+
+    {
         id: 'MacroKeyboard',
         image: ['./images/MacroKeyboard/im1.png', './images/MacroKeyboard/im2.png', './images/MacroKeyboard/im3.png', './images/MacroKeyboard/im4.png'],
         title: 'MacroKeyboard',
