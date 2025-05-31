@@ -199,6 +199,19 @@ export const socialmedia = [
         keyFeatures: "Custom Keypad Interface: Program each key to perform specific actions like sending keystrokes or launching apps.OLED Display: Shows real-time data (e.g., time, temperature) and includes a Dino game. Volume Control: Adjust the system volume using a rotary encoder with mute functionality. Dino Game: A simple game displayed on the OLED and controlled via the keypad.",
     },
 
+    {
+        id: 'LEDCube',
+        image: ['./images/LEDCube/im1.jpg', './images/LEDCube/im2.jpg'],
+        title: 'LEDCube',
+        description: '3D LED cube display with dynamic animations and patterns controlled by Arduino.',
+        GitHubLink: '',
+        YouTubeLink: '',
+        technologies: ["0"],
+        briefDescription: "An Arduino-powered 3D LED cube featuring dynamic animations and patterns, demonstrating efficient LED multiplexing and creative visual effects.",
+        problemStatement: "Creating a 3D LED display requires efficient control of multiple LEDs while maintaining smooth animations and managing power consumption.",
+        keyFeatures: "• 3D LED matrix display\n• Dynamic pattern animations\n• Arduino control system\n• Efficient LED multiplexing\n• Custom animation sequences",
+    },
+
 
     {
         id: 'LOID_V1',
