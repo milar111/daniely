@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { icons } from '@/data';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+
+const iconMap = new Map(icons.map(icon => [icon.id, icon]));
 
 interface ProjectCardProps {
   project: {
@@ -11,7 +13,7 @@ interface ProjectCardProps {
     title: string;
     description: string;
     image: string[];
-    technologies: string[];
+    technologies: (string | { id: string; size?: number })[];
     GitHubLink?: string;
     YouTubeLink?: string;
   };
@@ -23,6 +25,7 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, isLastOddCard }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const router = useRouter();
+  
   const { ref } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -69,6 +72,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
                 src={imgSrc}
                 alt={project.title}
                 fill
+                sizes="(max-width: 450px) 100vw, 400px"
+                priority={index < 2 && imgIndex === 0}
                 className="object-cover rounded-2xl"
               />
             </motion.div>
@@ -117,16 +122,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
       </motion.h1>
 
       <div className="absolute bottom-16 xxsm:bottom-[3.5rem] left-3">
-        {project.technologies.map((techId, techIndex) => {
-          const techIcon = icons.find((icon) => icon.id === techId);
+        {project.technologies.map((techItem, techIndex) => {
+          const techId = typeof techItem === 'string' ? techItem : techItem.id;
+          
+          const techIcon = iconMap.get(techId);
+          
+          const techRadius = typeof techItem === 'object' && techItem.size ? techItem.size : 12;
+          const techDiameter = techRadius * 2;
+
           const translationX = windowWidth > 380 ? 35 * techIndex + 5 : 26 * techIndex + 5;
 
           return (
             <motion.div
               key={techIndex}
               style={{
-                transform: `translateX(${translationX}px)`,
-                zIndex: `${project.technologies.length - techIndex}`,
+                x: translationX,
+                zIndex: project.technologies.length - techIndex,
                 position: 'absolute',
               }}
               className="border border-border bg-darkGray rounded-full w-11 h-11 flex justify-center items-center filter grayscale 
@@ -136,7 +147,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, windowWidth, 
               transition={{ delay: 0.4 + techIndex * 0.1 }}
             >
               {techIcon && (
-                <Image src={techIcon.icon} alt={techIcon.name} width={24} height={24} />
+                <Image 
+                  src={techIcon.icon} 
+                  alt={techIcon.name} 
+                  width={techDiameter} 
+                  height={techDiameter} 
+                  className="object-contain" 
+                />
               )}
             </motion.div>
           );

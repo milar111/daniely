@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { icons, technologies } from '@/data';
 import Image from 'next/image';
 
@@ -9,9 +9,12 @@ interface TechWheelProps {
   };
 }
 
+type TechItem = string | { id: string; size?: number };
+
+const iconMap = new Map(icons.map(icon => [icon.id, icon]));
+
 const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
   const [currentSize, setCurrentSize] = useState(size.lg);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,12 +34,79 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
 
   const outerCircleRadius = currentSize / 2.5;
   const innerCircleRadius = currentSize / 4;
-  const iconRadius = 15;
+  
   const centerX = currentSize / 2;
   const centerY = currentSize / 2;
 
-  const innerCircleTechs = technologies.slice(0, 3);
-  const outerCircleTechs = technologies.slice(3);
+  const BASE_ICON_RADIUS = 15;
+  const BUBBLE_RADIUS = BASE_ICON_RADIUS + 5; 
+
+  const techList = technologies as TechItem[];
+  const innerCircleTechs = techList.slice(0, 4);
+  const outerCircleTechs = techList.slice(4);
+
+  const renderTechItem = (item: TechItem, index: number, total: number, radius: number, isClockwise: boolean) => {
+    const techId = typeof item === 'string' ? item : item.id;
+    const customRadius = typeof item === 'object' && item.size ? item.size : BASE_ICON_RADIUS;
+    const imageDiameter = customRadius * 2;
+
+    const containerSize = imageDiameter * 1.5;
+    const offset = containerSize / 2;
+
+    const angle = (index / total) * 2 * Math.PI;
+    const orbitX = centerX + radius * Math.cos(angle);
+    const orbitY = centerY + radius * Math.sin(angle);
+    
+    const x = orbitX - offset;
+    const y = orbitY - offset;
+
+    const techIcon = iconMap.get(techId);
+    const animationName = isClockwise ? 'clockwiseRotation' : 'counterRotation';
+
+    return (
+      <g key={techId}>
+
+        <circle
+          cx={orbitX}
+          cy={orbitY}
+          r={BUBBLE_RADIUS}
+          fill='#D9D9D9'
+          fillOpacity='0.9'
+          stroke='black'
+          strokeOpacity='0.36'
+          strokeWidth="1"
+        />
+        
+        <foreignObject x={x} y={y} width={containerSize} height={containerSize}>
+          <div style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            transformOrigin: 'center',
+            animation: `${animationName} 95s linear infinite`,
+            willChange: 'transform',
+          }}>
+            {techIcon && (
+              <div style={{ width: imageDiameter, height: imageDiameter, position: 'relative' }}>
+                <Image
+                  src={techIcon.icon}
+                  alt={techId}
+                  fill
+                  sizes={`${imageDiameter}px`} 
+                  loading="eager"
+                  priority={true}
+                  quality={90}
+                  className="object-contain"
+                />
+              </div>
+            )}
+          </div>
+        </foreignObject>
+      </g>
+    );
+  };
 
   return (
     <div className='tech-wheel'>
@@ -46,7 +116,7 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
         viewBox={`0 0 ${currentSize} ${currentSize}`}
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Outer Circle */}
+        {/* Outer Circle Track */}
         <g style={{ transformOrigin: `${centerX}px ${centerY}px`, animation: `outerSpin 95s linear infinite` }}>
           <circle
             cx={centerX}
@@ -58,54 +128,12 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
             strokeDasharray="5,5"
             strokeLinecap="round"
           />
-          {outerCircleTechs.map((techId, index) => {
-            const angle = (index / outerCircleTechs.length) * 2 * Math.PI;
-            const x = centerX + outerCircleRadius * Math.cos(angle) - iconRadius;
-            const y = centerY + outerCircleRadius * Math.sin(angle) - iconRadius;
-            const techIcon = icons.find(icon => icon.id === techId);
-            return (
-              <g key={techId}>
-                <circle
-                  cx={x + iconRadius}
-                  cy={y + iconRadius}
-                  r={iconRadius + 5}
-                  fill='#D9D9D9'
-                  fillOpacity='0.9'
-                  stroke='black'
-                  strokeOpacity='0.36'
-                  strokeWidth="1"
-                />
-                <foreignObject x={x} y={y} width={iconRadius * 2} height={iconRadius * 2}>
-                  <div style={{
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    transformOrigin: 'center',
-                    animation: `counterRotation 95s linear infinite`,
-                  }}>
-                    {techIcon && (
-                      <Image
-                        src={techIcon.icon}
-                        alt={techId}
-                        width={iconRadius * 2}
-                        height={iconRadius * 2}
-                        loading="eager"
-                        priority={true}
-                        quality={90}
-                        className="object-contain"
-                        onLoadingComplete={() => setIsLoading(false)}
-                      />
-                    )}
-                  </div>
-                </foreignObject>
-              </g>
-            );
-          })}
+          {outerCircleTechs.map((item, index) => 
+            renderTechItem(item, index, outerCircleTechs.length, outerCircleRadius, false)
+          )}
         </g>
 
-        {/* Inner Circle */}
+        {/* Inner Circle Track */}
         <g style={{ transformOrigin: `${centerX}px ${centerY}px`, animation: `innerSpin 95s linear infinite` }}>
           <circle
             cx={centerX}
@@ -117,51 +145,9 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
             strokeDasharray="5,5"
             strokeLinecap="round"
           />
-          {innerCircleTechs.map((techId, index) => {
-            const angle = (index / innerCircleTechs.length) * 2 * Math.PI;
-            const x = centerX + innerCircleRadius * Math.cos(angle) - iconRadius;
-            const y = centerY + innerCircleRadius * Math.sin(angle) - iconRadius;
-            const techIcon = icons.find(icon => icon.id === techId);
-            return (
-              <g key={techId}>
-                <circle
-                  cx={x + iconRadius}
-                  cy={y + iconRadius}
-                  r={iconRadius + 5}
-                  fill='#D9D9D9'
-                  fillOpacity='0.9'
-                  stroke='black'
-                  strokeOpacity='0.36'
-                  strokeWidth="1"
-                />
-                <foreignObject x={x} y={y} width={iconRadius * 2} height={iconRadius * 2}>
-                  <div style={{
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    transformOrigin: 'center',
-                    animation: `clockwiseRotation 95s linear infinite`,
-                  }}>
-                    {techIcon && (
-                      <Image
-                        src={techIcon.icon}
-                        alt={techId}
-                        width={iconRadius * 2}
-                        height={iconRadius * 2}
-                        loading="eager"
-                        priority={true}
-                        quality={90}
-                        className="object-contain"
-                        onLoadingComplete={() => setIsLoading(false)}
-                      />
-                    )}
-                  </div>
-                </foreignObject>
-              </g>
-            );
-          })}
+          {innerCircleTechs.map((item, index) => 
+            renderTechItem(item, index, innerCircleTechs.length, innerCircleRadius, true)
+          )}
         </g>
       </svg>
       <style jsx>{`
@@ -175,39 +161,23 @@ const TechWheel: React.FC<TechWheelProps> = ({ size }) => {
         }
 
         @keyframes outerSpin {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(-360deg);
-          }
+          from { transform: rotate(0deg); }
+          to { transform: rotate(-360deg); }
         }
 
         @keyframes innerSpin {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
 
         @keyframes counterRotation {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
 
         @keyframes clockwiseRotation {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(-360deg);
-          }
+          from { transform: rotate(0deg); }
+          to { transform: rotate(-360deg); }
         }
       `}</style>
     </div>

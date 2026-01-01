@@ -182,7 +182,7 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <p className='font-inconsolata font-light leading-tight text-md text-center px-12'>
+            <p className='font-inconsolata font-light leading-tight text-md text-center px-4 sm:px-12'>
               <span>{project.briefDescription}</span>
             </p>
             <motion.div 
@@ -245,7 +245,7 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
           <span>Objectives and Goals</span>
         </motion.h1>
         <motion.div 
-          className='p-6 bg-grayISH bg-opacity-30 rounded-lg flex justify-center items-center shadow-md h-full px-36'
+          className='p-6 bg-grayISH bg-opacity-30 rounded-lg flex justify-center items-center shadow-md h-full px-6 sm:px-10 lg:px-36'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
@@ -256,7 +256,6 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
         </motion.div>
       </motion.div>
 
-      {/* Features and Highlights */}
       <motion.div 
         className='mt-8 w-full max-w-5xl'
         initial={{ opacity: 0, y: 20 }}
@@ -272,7 +271,7 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
           <span>Features and Highlights</span>
         </motion.h1>
         <motion.div 
-          className='p-6 bg-grayISH bg-opacity-30 rounded-lg flex justify-center items-center shadow-md h-full px-36'
+          className='p-6 bg-grayISH bg-opacity-30 rounded-lg flex justify-center items-center shadow-md h-full px-6 sm:px-10 lg:px-36'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1 }}

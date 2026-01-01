@@ -32,40 +32,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparksRef = useRef<Spark[]>([]);
-  const startTimeRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const parent = canvas.parentElement;
-    if (!parent) return;
-
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-
-    const resizeCanvas = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
-    };
-
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(resizeCanvas, 100);
-    };
-
-    const ro = new ResizeObserver(handleResize);
-    ro.observe(parent);
-
-    resizeCanvas();
-
-    return () => {
-      ro.disconnect();
-      clearTimeout(resizeTimeout);
-    };
-  }, []);
+  const animationIdRef = useRef<number | null>(null);
 
   const easeFunc = useCallback(
     (t: number) => {
@@ -86,57 +53,96 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    const parent = canvas.parentElement || document.body;
+    let resizeTimeout: NodeJS.Timeout;
+
+    const resizeCanvas = () => {
+      const { width, height } = parent.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+
+      if (canvas.width !== width * dpr || canvas.height !== height * dpr) {
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+            ctx.scale(dpr, dpr);
+        }
+      }
+    };
+
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resizeCanvas, 100);
+    };
+
+    const ro = new ResizeObserver(handleResize);
+    ro.observe(parent);
+
+    resizeCanvas();
+
+    return () => {
+      ro.disconnect();
+      clearTimeout(resizeTimeout);
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
+    };
+  }, []);
+
+  const draw = useCallback((timestamp: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animationId: number;
+    const { width, height } = canvas.getBoundingClientRect();
+    ctx.clearRect(0, 0, width, height);
 
-    const draw = (timestamp: number) => {
-      if (!startTimeRef.current) {
-        startTimeRef.current = timestamp;
-      }
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    sparksRef.current = sparksRef.current.filter((spark) => {
+      const elapsed = timestamp - spark.startTime;
+      return elapsed < duration;
+    });
 
-      sparksRef.current = sparksRef.current.filter((spark: Spark) => {
-        const elapsed = timestamp - spark.startTime;
-        if (elapsed >= duration) {
-          return false;
-        }
+    if (sparksRef.current.length === 0) {
+      animationIdRef.current = null;
+      return;
+    }
 
-        const progress = elapsed / duration;
-        const eased = easeFunc(progress);
+    ctx.strokeStyle = sparkColor;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
 
-        const distance = eased * sparkRadius * extraScale;
-        const lineLength = sparkSize * (1 - eased);
+    sparksRef.current.forEach((spark) => {
+      const elapsed = timestamp - spark.startTime;
+      const progress = elapsed / duration;
+      const eased = easeFunc(progress);
 
-        const x1 = spark.x + distance * Math.cos(spark.angle);
-        const y1 = spark.y + distance * Math.sin(spark.angle);
-        const x2 = spark.x + (distance + lineLength) * Math.cos(spark.angle);
-        const y2 = spark.y + (distance + lineLength) * Math.sin(spark.angle);
+      const distance = eased * sparkRadius * extraScale;
+      const lineLength = sparkSize * (1 - eased);
 
-        ctx.strokeStyle = sparkColor;
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
+      const x1 = spark.x + distance * Math.cos(spark.angle);
+      const y1 = spark.y + distance * Math.sin(spark.angle);
+      const x2 = spark.x + (distance + lineLength) * Math.cos(spark.angle);
+      const y2 = spark.y + (distance + lineLength) * Math.sin(spark.angle);
 
-        return true;
-      });
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+    });
 
-      animationId = requestAnimationFrame(draw);
-    };
+    ctx.stroke();
 
-    animationId = requestAnimationFrame(draw);
+    animationIdRef.current = requestAnimationFrame(draw);
+  }, [sparkColor, sparkSize, sparkRadius, duration, easeFunc, extraScale]);
 
-    return () => {
-      cancelAnimationFrame(animationId);
-    };
-  }, [sparkColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale]);
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>): void => {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -150,14 +156,22 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     }));
 
     sparksRef.current.push(...newSparks);
+
+    if (animationIdRef.current === null) {
+      animationIdRef.current = requestAnimationFrame(draw);
+    }
   };
 
   return (
     <div className="relative w-full min-h-screen" onClick={handleClick}>
-      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 pointer-events-none"
+        style={{ width: '100%', height: '100%' }}
+      />
       {children}
     </div>
   );
 };
 
-export default ClickSpark; 
+export default ClickSpark;

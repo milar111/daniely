@@ -28,7 +28,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             className='font-inconsolata lg:text-fontLG2 text-[20px] font-light leading-tight xsm:text-lg'
           >
-            <span>Computer Science student,</span><br />
+            <span>High School student,</span><br />
             <span>eager to turn ideas into reality.</span>
           </motion.h1>
           <motion.div 
