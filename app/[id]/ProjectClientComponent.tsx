@@ -10,7 +10,7 @@ interface Project {
   id: string;
   title: string;
   image: string[];
-  technologies: string[];
+  technologies: (string | { id: string; size?: number })[]; 
   briefDescription: string;
   problemStatement: string;
   keyFeatures: string;
@@ -129,7 +129,9 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
           </div>
 
           <div className='absolute bottom-16 xxsm:bottom-[3.5rem] left-3'>
-            {project.technologies.map((techId: string, techIndex: number) => {
+            {project.technologies.map((techItem, techIndex) => {
+              const techId = typeof techItem === 'string' ? techItem : techItem.id;
+              
               const techIcon = icons.find((icon: Icon) => icon.id === techId);
               const translationX =
                 windowWidth > 380 ? 35 * techIndex + 5 : 26 * techIndex + 5;
