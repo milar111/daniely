@@ -132,6 +132,9 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
             {project.technologies.map((techItem, techIndex) => {
               const techId = typeof techItem === 'string' ? techItem : techItem.id;
               
+              const techRadius = typeof techItem === 'object' && techItem.size ? techItem.size : 12;
+              const techDiameter = techRadius * 2;
+
               const techIcon = icons.find((icon: Icon) => icon.id === techId);
               const translationX =
                 windowWidth > 380 ? 35 * techIndex + 5 : 26 * techIndex + 5;
@@ -140,7 +143,7 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
                 <motion.div
                   key={techIndex}
                   style={{
-                    transform: `translateX(${translationX}px)`,
+                    x: translationX, 
                     zIndex: `${project.technologies.length - techIndex}`,
                     position: 'absolute',
                   }}
@@ -153,9 +156,9 @@ const ProjectClientComponent = ({ project }: { project: Project }) => {
                     <Image
                       src={techIcon.icon}
                       alt={techIcon.name}
-                      width={24}
-                      height={24} 
-                      className='w-6 h-6 xxsm:w-5 xxsm:h-5'
+                      width={techDiameter}
+                      height={techDiameter} 
+                      className='object-contain'
                     />
                   )}
                 </motion.div>
