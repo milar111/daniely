@@ -46,7 +46,7 @@ const Projects = () => {
         className="w-full flex flex-col items-center text-center mx-auto"
       >
         <h1 className="font-inconsolata lg:text-4xl font-normal leading-tight text-3xl">
-          <span>What I&#39;ve benn working on</span>
+          <span>What I&#39;ve been working on</span>
         </h1>
         <h1 className="font-inconsolata lg:text-fontLG2 font-light leading-tight pb-8 xsm:pb-2 text-[20px]">
           <span>A selection of projects.</span>
